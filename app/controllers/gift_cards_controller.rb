@@ -17,7 +17,7 @@ class GiftCardsController < ApplicationController
   def show
     @gift_card = GiftCard.find_by(id: params[:id], card_number: params[:card_number])
     if @gift_card
-      @transactions = @gift_card.transactions.page(params[:page])
+      @transactions = @gift_card.transactions.order('created_at desc').limit(10)
     else
       redirect_to root_path, alert: "Invalid Card Details."
     end

@@ -14,7 +14,7 @@
   <button class="btn btn-primary" data-toggle="modal" data-target="#redeemModal">
     Redeem
   </button>
-  <div class="modal fade" id="redeemModal" tabindex="-1" role="dialog" aria-labelledby="approvalModalLabel" aria-hidden="true">
+  <div class="modal fade" id="redeemModal" tabindex="-1" role="dialog" aria-labelledby="redeemModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -22,7 +22,7 @@
           <h4 class="modal-title">Redeem Amount</h4>
         </div>
         <div class="modal-body">
-          <%= form_for(@gift_card.transactions.new, html: { multipart: true, method: :post}, remote: true) do |f|  %>
+          <%= form_for(@gift_card.transactions.new, html: {method: :post}) do |f|  %>
             <div class="form-group">
               <%= label_tag(:card_number, "Gift Card Number") %>
               <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
@@ -45,7 +45,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <%= submit_tag "Submit", class: "btn btn-success" %>
+            <%= submit_tag "Submit", class: "btn btn-success", data: { disable_with: false } %>
           </div>
         <% end %>
       </div>
@@ -64,5 +64,4 @@
       </tr>
     <% end %>
   </table>
-  <%= paginate @transactions %>
 </div>

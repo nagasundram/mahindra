@@ -1,4 +1,4 @@
 <% if user_signed_in? && !current_user.is_admin? %>
   <li><%= link_to 'Dashboard', page_path('dashboard') %></li>
-  <li><%= link_to 'Gift Cards', page_path('gift_cards')%></li>
+  <li><%= link_to 'Transactions', transactions_path %></li>
 <% end %>

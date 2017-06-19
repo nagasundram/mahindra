@@ -1,0 +1,26 @@
+<div class="input-group">
+  <%= form_tag(transactions_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Store Code/Gift Card/Invoice Number", class: 'form-control' %>
+    <span class="input-group-btn">
+       <%= submit_tag "Search", class: 'btn btn-success' %>
+    </span>
+  <% end %>
+</div>
+
+<table>
+  <th>Date</th>
+  <th>Invoice Number</th>
+  <th>Store Code</th>
+  <th>Store Name</th>
+  <th>Redeemed</th>
+  <th>Balance</th>
+  <th>Action</th>
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+      <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+      <td><%= link_to 'Delete', edit_transaction_path(transaction) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= paginate @transactions %>
