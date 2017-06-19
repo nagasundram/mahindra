@@ -5,6 +5,8 @@ class Transaction < ApplicationRecord
   validates :invoice_number, presence: true
   validates :redeemed_value, presence: true
   validates_numericality_of :redeemed_value, greater_than: 0
+  validates_numericality_of :current_balance, greater_than: 0
+
   after_create :update_card_balance
 
   def update_card_balance

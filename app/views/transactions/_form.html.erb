@@ -1,0 +1,11 @@
+<%= form_for(@transaction) do |f|  %>
+  <div class="form-wrapper spacing-top-half">
+    <div class="col-xs-12 col-sm-6 form-left">
+      <div class="form-group">
+        <%= label_tag(:card_number, "Gift Card Number") %>
+        <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
+      </div>
+
+    <%= f.submit 'Redeem', class: 'btn btn-secondary btn-form-cta' %>
+    </div>
+<% end %>

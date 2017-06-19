@@ -1,2 +1,4 @@
-<%# add navigation links to this file %>
-<li><%= link_to 'About', page_path('about') %></li>
+<% if user_signed_in? && !current_user.is_admin? %>
+  <li><%= link_to 'Dashboard', page_path('dashboard') %></li>
+  <li><%= link_to 'Gift Cards', page_path('gift_cards')%></li>
+<% end %>

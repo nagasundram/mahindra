@@ -1,0 +1,5 @@
+<% if current_user && current_user.is_admin? %>
+  <h1>Admin Actions</h1>
+<% else %>
+  <%= render 'gift_cards/form' %>
+<% end %>
