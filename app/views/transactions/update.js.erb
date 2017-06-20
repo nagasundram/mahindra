@@ -1,0 +1,3 @@
+<% if @transaction.errors.any? %>
+  $("#error_explanation").html("<%= j render partial: "layouts/errors", locals: { errors: @transaction.errors.full_messages }  %>");
+<% end %>

@@ -18,9 +18,11 @@
   <% @transactions.each do |transaction| %>
     <tr>
       <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
-      <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-      <td><%= link_to 'Delete', edit_transaction_path(transaction) %></td>
+      <td>
+        <%= link_to "Edit", edit_transaction_path(transaction),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
+      </td>
     </tr>
   <% end %>
 </table>
+<%= render partial: "layouts/modal_window", locals: { modal_id: 'editTransaction' } %>
 <%= paginate @transactions %>

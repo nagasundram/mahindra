@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
     if params[:search].present?
       @transactions = Transaction.joins(:user,:gift_card).where("users.store_code like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search]}%","%#{params[:search]}%", "%#{params[:search]}%").order('created_at desc').page(params[:page])
     else
-      @transactions = current_user.transactions.all.order('created_at desc').page(params[:page])
+      @transactions = Transaction.all.order('created_at desc').page(params[:page])
     end
   end
 
@@ -33,10 +33,44 @@ class TransactionsController < ApplicationController
     end
   end
 
+
+  def edit
+    @transaction = Transaction.find(params[:id])
+    @gift_card = @transaction.gift_card
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def update
+    @transaction = Transaction.find(params[:id])
+    respond_to do |format|
+      if @transaction.update_attributes(update_params)
+        @transaction.gift_card.update_attributes(balance: @transaction.current_balance)
+        format.html {redirect_to transactions_path, notice: "Transaction Updated successfully"}
+      else
+        format.html { render :edit }
+        format.js
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   private
 
   def transaction_params
     params.require(:transaction).permit(:gift_card_id, :invoice_number, :redeemed_value)
+  end
+
+  def update_params
+    return {
+      invoice_number: params[:transaction][:invoice_number],
+      redeemed_value: params[:transaction][:redeemed_value],
+      audit_comment: params[:audit_comment],
+      current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
+    }
   end
 
 end
