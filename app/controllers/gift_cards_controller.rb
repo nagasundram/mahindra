@@ -1,8 +1,9 @@
 class GiftCardsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_user!
 
   def index
-    @gift_cards = GiftCard.where("card_number like ?", "%#{params[:search]}%").order('created_at desc').page(params[:page])
+    @gift_cards = GiftCard.where("card_number like ?", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def validate
@@ -35,13 +36,19 @@ class GiftCardsController < ApplicationController
     @gift_card = GiftCard.find(params[:id])
     respond_to do |format|
       if @gift_card.update_attributes({balance: @gift_card.balance + params[:top_up].to_f, audit_comment: params[:audit_comment]})
-        format.html {redirect_to gift_cards_path(page: params[:page], search: params[:search]), notice: "Top up successful"}
+        format.html {redirect_to gift_cards_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Top up successful"}
       else
         format.html { render :edit }
         format.js
         format.json { render json: @gift_card.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def sort_column
+    GiftCard.column_names.include?(params[:sort]) ? params[:sort] : "expiry"
   end
 
 end

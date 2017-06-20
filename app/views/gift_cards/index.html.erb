@@ -10,7 +10,7 @@
 <table border=1>
   <th>Gift Card Number</th>
   <th>Balance</th>
-  <th>Expiry</th>
+  <th><%= sortable "expiry", "Expiry" %></th>
   <th>Action</th>
   <% @gift_cards.each do |gift_card| %>
     <tr>

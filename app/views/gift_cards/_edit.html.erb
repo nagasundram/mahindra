@@ -25,6 +25,7 @@
         <% params = request.query_parameters %>
         <%= hidden_field_tag(:page, '', value: params[:page])%>
         <%= hidden_field_tag(:search,'', value: params[:search]) %>
+        <%= hidden_field_tag(:direction,'', value: params[:direction]) %>
         <div class="form-group">
           <%= text_field_tag(:audit_comment, '', placeholder: 'Comment', class: 'form-control') %>
         </div>

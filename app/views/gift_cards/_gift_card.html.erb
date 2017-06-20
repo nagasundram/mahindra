@@ -2,4 +2,4 @@
 <td><%= gift_card.balance %></td>
 <td><%= gift_card.formatted_expiry %></td>
 <% params = request.query_parameters %>
-<td><%= link_to "Edit", edit_gift_card_path({id: gift_card, page: params[:page], search: params[:search]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editGiftCard'} %></td>
+<td><%= link_to "Edit", edit_gift_card_path({id: gift_card, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editGiftCard'} %></td>

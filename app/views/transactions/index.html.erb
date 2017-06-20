@@ -8,7 +8,7 @@
 </div>
 
 <table>
-  <th>Date</th>
+  <th><%= sortable "created_at", "Date" %></th>
   <th>Invoice Number</th>
   <th>Store Code</th>
   <th>Store Name</th>
@@ -19,7 +19,7 @@
     <tr>
       <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
       <td>
-        <%= link_to "Edit", edit_transaction_path(transaction),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
+        <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
       </td>
     </tr>
   <% end %>

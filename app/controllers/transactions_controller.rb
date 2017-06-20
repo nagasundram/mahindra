@@ -1,12 +1,9 @@
 class TransactionsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_user!
 
   def index
-    if params[:search].present?
-      @transactions = Transaction.joins(:user,:gift_card).where("users.store_code like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search]}%","%#{params[:search]}%", "%#{params[:search]}%").order('created_at desc').page(params[:page])
-    else
-      @transactions = Transaction.all.order('created_at desc').page(params[:page])
-    end
+    @transactions = Transaction.joins(:user,:gift_card).where("users.store_code like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search]}%","%#{params[:search]}%", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def new
@@ -48,7 +45,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update_attributes(update_params)
         @transaction.gift_card.update_attributes(balance: @transaction.current_balance)
-        format.html {redirect_to transactions_path, notice: "Transaction Updated successfully"}
+        format.html {redirect_to transactions_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Transaction Updated successfully"}
       else
         format.html { render :edit }
         format.js
@@ -71,6 +68,10 @@ class TransactionsController < ApplicationController
       audit_comment: params[:audit_comment],
       current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
     }
+  end
+
+  def sort_column
+    Transaction.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
 end
