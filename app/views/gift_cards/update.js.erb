@@ -1,0 +1,3 @@
+<% if @gift_card.errors.any? %>
+  $("#error_explanation").html("<%= j render partial: "layouts/errors", locals: { errors: @gift_card.errors.full_messages }  %>");
+<% end %>

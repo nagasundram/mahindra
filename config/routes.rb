@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
-  resources :gift_cards, only: [:index, :show] do
+  resources :gift_cards do
     collection do
       get 'validate'
     end
