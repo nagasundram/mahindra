@@ -12,8 +12,7 @@
           <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
         </div>
         <div class="form-group">
-          <%= label_tag(:expiry, "Expiration Date") %>
-          <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
+          <%= f.date_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true %>
         </div>
         <div class="form-group">
           <%= label_tag(:balance, "Gift Card Balance") %>
