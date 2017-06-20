@@ -13,5 +13,7 @@ class Transaction < ApplicationRecord
   def update_card_balance
     self.gift_card.update_attributes({balance: (self.gift_card.balance - self.redeemed_value)})
   end
-
+  def formatted_created_at
+    created_at.strftime("%d/%m/%Y")
+  end
 end

@@ -9,13 +9,28 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def new
+    @gift_card = GiftCard.find(params[:id])
+    @transaction = Transaction.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+
   def create
     @transaction = current_user.transactions.new(transaction_params)
     @transaction.current_balance = @transaction.gift_card.balance - @transaction.redeemed_value
-    if @transaction.save
-      redirect_to root_path, notice: "Redemption successful"
-    else
-      redirect_to gift_card_path(id: @transaction.gift_card.id, card_number: @transaction.gift_card.card_number), alert: @transaction.errors.full_messages[0]
+    respond_to do |format|
+      if @transaction.save
+        format.html {redirect_to root_path, notice: "Redemption successful"}
+      else
+        puts @transaction.errors.full_messages
+        format.html { render :new }
+        format.js
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
