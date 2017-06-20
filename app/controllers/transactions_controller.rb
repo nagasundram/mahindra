@@ -24,9 +24,8 @@ class TransactionsController < ApplicationController
     @transaction.current_balance = @transaction.gift_card.balance - @transaction.redeemed_value
     respond_to do |format|
       if @transaction.save
-        format.html {redirect_to root_path, notice: "Redemption successful"}
+        format.html {redirect_to gift_card_path(id: @transaction.gift_card.id, card_number: @transaction.gift_card.card_number), notice: "Redemption successful"}
       else
-        puts @transaction.errors.full_messages
         format.html { render :new }
         format.js
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
