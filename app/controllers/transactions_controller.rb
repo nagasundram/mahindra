@@ -62,12 +62,19 @@ class TransactionsController < ApplicationController
   end
 
   def update_params
-    return {
-      invoice_number: params[:transaction][:invoice_number],
-      redeemed_value: params[:transaction][:redeemed_value],
-      audit_comment: params[:audit_comment],
-      current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
-    }
+    unless @transaction.redeemed_value.to_i == params[:transaction][:redeemed_value].to_i
+      return {
+        invoice_number: params[:transaction][:invoice_number],
+        redeemed_value: params[:transaction][:redeemed_value],
+        audit_comment: params[:audit_comment],
+        current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
+      }
+    else
+      return {
+        invoice_number: params[:transaction][:invoice_number],
+        audit_comment: params[:audit_comment]
+      }
+    end
   end
 
   def sort_column
