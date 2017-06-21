@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       @total_gift_card_balance = GiftCard.sum(:balance).to_i
       # @redeemed_this_month = Transaction.where('MONTH(updated_at) = ?', Date.today.month).sum(:redeemed_value).to_i
       # @will_expire_cards = GiftCard.where('MONTH(expiry) = ?', Date.today.month).count
-      @transactions= Transaction.group('DATE(updated_at)').order("updated_at desc").sum(:redeemed_value)
+      @transactions= Transaction.group('DATE(updated_at)').sum(:redeemed_value)
       @monthly_summary = {}
       (1.month.ago.to_date..Date.today).each {|x| @monthly_summary[x] = 0}
         @monthly_summary.each do |k,v|
