@@ -1,19 +1,34 @@
-<div>
-  <div class="form-group">
-    <%= label_tag(:card_number, "Gift Card Number") %>
-    <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
+<div class="common-wrap container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:card_number, "Gift Card Number") %>
+        <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:expiry, "Expiration Date") %>
+        <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.expiry) %>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= label_tag(:expiry, "Expiration Date") %>
-    <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.expiry) %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <%= label_tag(:balance, "Gift Card Balance") %>
+      <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= label_tag(:balance, "Gift Card Balance") %>
-    <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
+  <div class="col-sm-6 redeem-btn">
+    <%= link_to "Redeem", new_transaction_path(id: @gift_card),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'} %>
+    <%= render partial: "layouts/modal_window", locals: { modal_id: 'redeemModal' } %>
   </div>
-  <%= link_to "Redeem", new_transaction_path(id: @gift_card),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'} %>
-  <%= render partial: "layouts/modal_window", locals: { modal_id: 'redeemModal' } %>
-  <table>
+</div>
+
+
+  <table class="table">
     <th>Date</th>
     <th>Invoice Number</th>
     <th>Store Code</th>

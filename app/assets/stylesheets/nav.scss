@@ -1,0 +1,51 @@
+// Navigation
+
+.nav-logo{
+  min-height: 70px;
+  //margin: 10px 0;
+  position: relative;
+}
+.container-fluid.logo-margin{
+  //margin-left:-15px;
+}
+
+.navbar-inverse{
+  border:#fff;
+  background: #E41C39;
+}
+.navbar-brand{
+  padding: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+  color:#fff;
+}
+
+.navbar-right{
+  position:relative;
+  top: 9px;
+}
+.navbar-toggle{
+  top: 9px
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+  background: transparent;
+  border: none;
+}
+
+.navbar-nav > li > .dropdown-menu{
+  border-radius: 0;
+  margin-right: 5px;
+//  border-color: lighten(#E41C39, 60%);
+  background: #E41C39;
+  a{
+    color: #fff;
+    font-weight: 300;
+  }
+  li:hover{
+    a{
+      color: #999;
+    }
+  }
+}

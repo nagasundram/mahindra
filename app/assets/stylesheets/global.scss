@@ -1,0 +1,68 @@
+main{
+  background: transparent;
+}
+
+body{
+  margin-top: 70px;
+}
+
+body, h1, h2, h3, h4, p, li, a{
+  font-family: 'Lato', sans-serif;
+}
+
+$red: #E41C39;
+$grey: #999;
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #999!important;
+    font-weight:300;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #999!important;
+   font-weight:300;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #999!important;
+   font-weight:300;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #999!important;
+   font-weight:300;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #999!important;
+   font-weight:300;
+}
+.button, .btn, .btn-primary, .btn-danger{
+  font-weight: 300!important;
+  border: none;
+  text-transform: uppercase;
+}
+
+.flash-messages{
+  position: fixed;
+  bottom:10px;
+  left: 10px;
+  z-index: 99999999;
+  min-width: 300px;
+}
+.modal-header{
+background: red;
+.close{
+  opacity: .7;
+  text-shadow: none;
+  color: #fff;
+  &:hover{
+    opacity: 1;
+  }
+}
+}
+.modal-title{
+  text-align: left;
+  color:#fff;
+}
+.form-group{
+    text-align: left;
+}

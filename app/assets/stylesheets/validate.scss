@@ -1,0 +1,17 @@
+.validate-outer{
+  height: calc(100vh - 70px);
+  display: flex;
+  .authform{
+    margin: auto;
+    min-width: 320px;
+  }
+  form{
+        background: rgba(225, 225, 225, .5);
+        border:none;
+  }
+  .center{
+    .btn{
+      margin: 5px;
+    }
+  }
+}
