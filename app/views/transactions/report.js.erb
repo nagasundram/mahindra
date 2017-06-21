@@ -1,0 +1,2 @@
+$("#reportModel").html("<%= escape_javascript(render partial: 'transactions/report',  locals: { transactions: @transactions}) %>");
+$("#reportModel").modal('show');

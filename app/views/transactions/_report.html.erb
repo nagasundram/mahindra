@@ -1,0 +1,32 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title">Transactions</h4>
+    </div>
+    <div class="modal-body">
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Invoice Number</th>
+        <th>Gift Card Number</th>
+        <th>Store Code</th>
+        <th>Store Name</th>
+        <th>Redeemed</th>
+        <th>Balance</th>
+      </tr>
+      <% transactions.each do|transaction| %>
+        <tr>
+          <td><%= transaction.updated_at.strftime("%d/%m/%Y") %></td>
+          <td><%= transaction.invoice_number %></td>
+          <td><%= transaction.gift_card.card_number %></td>
+          <td><%= transaction.user.store_code %></td>
+          <td><%= transaction.user.store_name %></td>
+          <td><%= transaction.redeemed_value %></td>
+          <td><%= transaction.current_balance %></td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+</div>

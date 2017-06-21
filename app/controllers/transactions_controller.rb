@@ -54,6 +54,13 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def report
+    @transactions = Transaction.where(updated_at: params[:start_date].to_date..params[:end_date].to_date)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   private
 
