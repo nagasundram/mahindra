@@ -23,23 +23,28 @@
               <div class="col-sm-3"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
               <div class="col-sm-3"><%= change["redeemed_value"][0] %></div>
               <div class="col-sm-3"><%= change["redeemed_value"][1] %></div>
-              <div class="col-sm-3"><%= change["current_balance"][1] %></div>
+              <div class="col-sm-3">
+                <%= change["current_balance"][1] %>
+                <%= popover("Remarks", "#{audit.comment}") %>
+              </div>
+
             </div>
           <% end %>
         <% end %>
         <h5>Invoice Changes</h5>
         <div class="row">
-          <div class="col-sm-4">Date</div>
-          <div class="col-sm-4">From</div>
-          <div class="col-sm-4">To</div>
+          <div class="col-sm-3">Date</div>
+          <div class="col-sm-3">From</div>
+          <div class="col-sm-3">To</div>
         </div>
         <% audits.each_with_index do|audit, index| %>
           <% change = audit.audited_changes %>
           <% if change["invoice_number"].present? %>
             <div class="row">
-              <div class="col-sm-4"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
-              <div class="col-sm-4"><%= change["invoice_number"][0] %></div>
-              <div class="col-sm-4"><%= change["invoice_number"][1] %></div>
+              <div class="col-sm-3"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
+              <div class="col-sm-3"><%= change["invoice_number"][0] %></div>
+              <div class="col-sm-3"><%= change["invoice_number"][1] %></div>
+              <div class="col-sm-3"><%= popover("Remarks", "#{audit.comment}") %></div>
             </div>
           <% end %>
         <% end %>
@@ -47,3 +52,10 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $("[data-pop-over]").popover({
+      placement: 'auto',
+      animation: true,
+      trigger: "click hover focus"
+    });
+</script>
