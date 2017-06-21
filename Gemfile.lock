@@ -45,7 +45,7 @@ GEM
       activerecord (>= 4.0, < 5.2)
     autoprefixer-rails (7.1.1.2)
       execjs
-    awesome_print (1.7.0)
+    awesome_print (1.8.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -131,7 +131,7 @@ GEM
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
-    pg (0.20.0)
+    pg (0.21.0)
     public_suffix (2.0.5)
     puma (3.9.1)
     rack (2.0.3)
@@ -254,7 +254,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.2.5p319
+   ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.1
+   1.14.6
