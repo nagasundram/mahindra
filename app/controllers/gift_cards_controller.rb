@@ -4,6 +4,7 @@ class GiftCardsController < ApplicationController
 
   def index
     @gift_cards = GiftCard.where("card_number like ?", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
+    @gift_card_audits = Audited::Audit.where(action: 'update', auditable_type: 'GiftCard', user_id: 1).order('created_at desc')
   end
 
   def validate
