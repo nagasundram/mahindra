@@ -6,19 +6,42 @@
     </div>
     <div class="modal-body">
       <div>Invoice Number: <%= transaction.invoice_number %></div>
-      <div>Invoice Number: <%= transaction.gift_card.card_number %></div>
+      <div>Gift Card Number: <%= transaction.gift_card.card_number %></div>
+      <div>Gift Card Current Balance: <%= transaction.gift_card.balance %></div>
       <div>
+        <h5>Redeemed Amount Changes</h5>
+        <div class="row">
+          <div class="col-sm-3">Date</div>
+          <div class="col-sm-3">From</div>
+          <div class="col-sm-3">To</div>
+          <div class="col-sm-3">Balance</div>
+        </div>
+        <% audits.each_with_index do|audit, index| %>
+          <% change = audit.audited_changes %>
+          <% if change["redeemed_value"].present? %>
+            <div class="row">
+              <div class="col-sm-3"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
+              <div class="col-sm-3"><%= change["redeemed_value"][0] %></div>
+              <div class="col-sm-3"><%= change["redeemed_value"][1] %></div>
+              <div class="col-sm-3"><%= change["current_balance"][1] %></div>
+            </div>
+          <% end %>
+        <% end %>
+        <h5>Invoice Changes</h5>
         <div class="row">
           <div class="col-sm-4">Date</div>
           <div class="col-sm-4">From</div>
           <div class="col-sm-4">To</div>
         </div>
-        <% audits.each do|audit| %>
-          <div class="row">
-            <div class="col-sm-4"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
-            <div class="col-sm-4">...</div>
-            <div class="col-sm-4">...</div>
-          </div>
+        <% audits.each_with_index do|audit, index| %>
+          <% change = audit.audited_changes %>
+          <% if change["invoice_number"].present? %>
+            <div class="row">
+              <div class="col-sm-4"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
+              <div class="col-sm-4"><%= change["invoice_number"][0] %></div>
+              <div class="col-sm-4"><%= change["invoice_number"][1] %></div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
