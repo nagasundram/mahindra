@@ -18,7 +18,7 @@
   <div class="col-sm-6">
     <div class="form-group">
       <%= label_tag(:expiry, "Expiration Date") %>
-      <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.expiry) %>
+      <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
     </div>
   </div>
 </div>
@@ -27,13 +27,13 @@
   <div class="col-sm-6">
     <div class="form-group">
       <%= label_tag(:store_code, "Gift Card Balance") %>
-      <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: current_user.store_code) %>
+      <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="form-group">
       <%= label_tag(:balance, "Store Id") %>
-      <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
+      <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: current_user.store_code) %>
       <%= f.hidden_field :gift_card_id, value: @gift_card.id %>
     </div>
   </div>
