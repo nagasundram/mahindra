@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title">Transactions</h4>
+    </div>
+    <div class="modal-body">
+      <div>Invoice Number: <%= transaction.invoice_number %></div>
+      <div>Invoice Number: <%= transaction.gift_card.card_number %></div>
+      <div>
+        <div class="row">
+          <div class="col-sm-4">Date</div>
+          <div class="col-sm-4">From</div>
+          <div class="col-sm-4">To</div>
+        </div>
+        <% audits.each do|audit| %>
+          <div class="row">
+            <div class="col-sm-4"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
+            <div class="col-sm-4">...</div>
+            <div class="col-sm-4">...</div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

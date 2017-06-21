@@ -62,6 +62,10 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def audits
+    @audits = Audited::Audit.where(action: 'update', auditable_type: 'Transaction', user_id: 1).order('created_at desc')
+  end
+
   private
 
   def transaction_params
