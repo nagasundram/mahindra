@@ -74,11 +74,13 @@ class TransactionsController < ApplicationController
 
   def update_params
     unless @transaction.redeemed_value.to_i == params[:transaction][:redeemed_value].to_i
+      @redeem_difference = (@transaction.redeemed_value.to_i - params[:transaction][:redeemed_value].to_i).to_i.abs
+      puts @redeem_difference
       return {
         invoice_number: params[:transaction][:invoice_number],
         redeemed_value: params[:transaction][:redeemed_value],
         audit_comment: params[:audit_comment],
-        current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
+        current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + @redeem_difference) :(@transaction.gift_card.balance - @redeem_difference)
       }
     else
       return {
