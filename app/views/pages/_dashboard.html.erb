@@ -1,6 +1,17 @@
+<h2>Export</h2>
+<div class="input-group">
+  <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
+    <%= date_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control' %>
+    <%= date_field_tag :end_date, '', placeholder: "End Date", class: 'form-control' %>
+    <span class="input-group-btn">
+       <%= submit_tag "Export", class: 'btn btn-success' %>
+    </span>
+  <% end %>
+</div>
+<%= render partial: "layouts/modal_window", locals: { modal_id: 'reportModel' } %>
+
 <h3>DashBoard</h3>
 <div>ACTIVE CARDS: <b><%= @active_cards %></b></div>
-
 <div>REDEEMED TODAY: <b><%= @redeemed_today %></b></div>
 <div>Total Gift Card Balance: <b><%= @total_gift_card_balance %></b></div>
 <div>Gift Cards Expired this month: <b><%= @expired_cards %></b></div>

@@ -9,7 +9,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= label_tag(:expiry, "Expiration Date") %>
-        <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.expiry) %>
+        <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
       </div>
     </div>
   </div>

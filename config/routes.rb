@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions
+  resources :transactions do
+    collection do
+      get 'report'
+      get 'audits'
+    end
+  end
 
 end

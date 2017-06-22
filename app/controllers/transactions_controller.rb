@@ -54,6 +54,18 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def report
+    @transactions = Transaction.where(updated_at: params[:start_date].to_date..params[:end_date].to_date)
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv { send_data @transactions.to_csv }
+    end
+  end
+
+  def audits
+    @audits = Audited::Audit.where(action: 'update', auditable_type: 'Transaction', user_id: 1).order('created_at desc')
+  end
 
   private
 
@@ -63,11 +75,13 @@ class TransactionsController < ApplicationController
 
   def update_params
     unless @transaction.redeemed_value.to_i == params[:transaction][:redeemed_value].to_i
+      @redeem_difference = (@transaction.redeemed_value.to_i - params[:transaction][:redeemed_value].to_i).to_i.abs
+      puts @redeem_difference
       return {
         invoice_number: params[:transaction][:invoice_number],
         redeemed_value: params[:transaction][:redeemed_value],
         audit_comment: params[:audit_comment],
-        current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + params[:transaction][:redeemed_value].to_f) :( @transaction.gift_card.balance - params[:transaction][:redeemed_value].to_f)
+        current_balance: (@transaction.redeemed_value.to_i > params[:transaction][:redeemed_value].to_i)? (@transaction.gift_card.balance + @redeem_difference) :(@transaction.gift_card.balance - @redeem_difference)
       }
     else
       return {

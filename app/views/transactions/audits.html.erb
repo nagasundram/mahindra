@@ -1,0 +1,27 @@
+<h3><%= link_to 'Go to Transactions', transactions_path %></h3>
+<table border="1">
+  <tr>
+    <th>Invoice Number</th>
+    <th>Gift Card Number</th>
+    <th>Last Edited</th>
+    <th>....</th>
+  </tr>
+<% @audits.group_by(&:auditable_id).each do |transaction_id, audit_history| %>
+  <% @transaction = Transaction.find(transaction_id) %>
+    <tr>
+      <td><%= @transaction.invoice_number %></td>
+      <td><%= @transaction.gift_card.card_number %></td>
+      <td><%= audit_history[0].created_at.strftime("%d/%m/%Y") %></td>
+      <td>
+        <a href="#" data-toggle="modal" data-target="#history-<%= transaction_id %>">
+          View more...
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <div class="modal fade" id="history-<%= transaction_id %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <%= render partial: "transactions/audit_history", locals: { audits: audit_history, transaction: @transaction } %>
+      </div>
+    </tr>
+  <% end %>
+</table>
