@@ -5,6 +5,7 @@ class GiftCard < ApplicationRecord
   validates :card_number, uniqueness: { message: " already exists"}
   validates :card_number, length: {is: 16, :message => "should be 16 characters"}
   validates :pin, length: {is: 6, :message => "should be 6 characters"}
+  validates :expiry, presence: {message: " required"}
 
 
   scope :active_cards, -> { where(status: 1) }

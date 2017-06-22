@@ -7,6 +7,8 @@ class Transaction < ApplicationRecord
   validates_numericality_of :redeemed_value, greater_than: 0
   validates_numericality_of :current_balance, greater_than: 0, message: "^Redemption should be less than or equal to card balance"
   validates :invoice_number, uniqueness: { message: " already exists" }
+  validates :invoice_number, length: {is: 1..30, :message => "should be between 2 to 30 characters"}
+
 
   after_create :update_card_balance
 
