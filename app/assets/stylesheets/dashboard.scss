@@ -1,0 +1,41 @@
+.admin-dashboard{
+  h1, h2, h3, h4{
+    color: #E41C39;
+    font-weight: 300;
+  }
+h2{
+  font-size: 50px;
+  small{
+    font-weight: 300;
+    font-size: 22px;
+    position:relative;
+    top: -10px;
+  }
+}
+}
+
+@media(min-width: 780px){
+  svg{
+    width: 70%;
+  }
+}
+#redeemed-circle{
+  text-align: center;
+  position: relative;
+  top: -50px;
+}
+
+.data-insights{
+h2{
+  border: 1px solid #979797;
+  padding: 30px;
+  border-radius: 5px;
+
+}
+}
+
+.download-report{
+  .col-sm-4{
+    padding-bottom: 10px;
+  }
+}

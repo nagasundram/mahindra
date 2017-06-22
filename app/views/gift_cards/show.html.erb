@@ -33,18 +33,25 @@
   </div>
 </div>
 
-  <h3>Transaction History</h3>
-  <table class="table">
-    <th>Date</th>
-    <th>Invoice Number</th>
-    <th>Store Code</th>
-    <th>Store Name</th>
-    <th>Redeemed</th>
-    <th>Balance</th>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
-      </tr>
-    <% end %>
-  </table>
+<h3>Transaction History</h3>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive data-tables">
+      <table class="table">
+        <th>Date</th>
+        <th>Invoice Number</th>
+        <th>Store Code</th>
+        <th>Store Name</th>
+        <th>Redeemed</th>
+        <th>Balance</th>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
 </div>

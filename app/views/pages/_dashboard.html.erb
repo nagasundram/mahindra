@@ -1,33 +1,149 @@
-<h2>Export</h2>
-<div class="input-group">
-  <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
+<!-- Admin Dashboard -->
+
+<div class="container common-wrap1 admin-dashboard">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Insights</h1>
+    </div>
+  </div>
+  <div class="row">
+        <div class="col-sm-6">
+          <h2 class="text-center"><%= @redeemed_today %> <small>Reedemed Today</small></h2>
+          <canvas id="redeemed" width="400" height="250"></canvas>
+        <script>
+
+        var ctx = document.getElementById("redeemed");
+        var redeemed = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: <%= raw @labels %>,
+                datasets: [{
+                    data: <%= raw @data %>,
+                    backgroundColor: <%= raw @colors %>,
+                    borderColor: <%= raw @border_colors %>,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              legend: {
+                display: false
+            },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+        </div>
+      <div class="col-sm-6">
+        <h2 class="text-center"><small>Total Redeemed</small></h2>
+      <div id="redeemed-circle"></div>
+      </div>
+  </div>
+
+<div class="row data-insights">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="text-center"><%= @total_gift_card_balance %> <small>Total Gift Card Balance</small></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="text-center"><%= @active_cards %> <small>Active Gift Cards</small></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row data-insights">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="text-center"><%= @redeemed_this_month %> <small>Redeemed This Month</small></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="text-center"><%= @expired_cards %> <small>Gift Cards Expired This Month</small></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="last-section download-report">
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Reports</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+      <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
     <%= date_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control' %>
-    <%= date_field_tag :end_date, '', placeholder: "End Date", class: 'form-control' %>
+  </div>
+  <div class="col-sm-4">
+        <%= date_field_tag :end_date, '', placeholder: "End Date", class: 'form-control' %>
+  </div>
+  <div class="col-sm-4">
     <span class="input-group-btn">
        <%= submit_tag "Export", class: 'btn btn-success' %>
     </span>
-  <% end %>
+  </div>
 </div>
-<%= render partial: "layouts/modal_window", locals: { modal_id: 'reportModel' } %>
+</div>
 
-<h3>DashBoard</h3>
+</div> <!-- /Container -->
+
+<script>
+$( document ).ready(function() { // 6,32 5,38 2,34
+  $("#redeemed-circle").circliful({
+      animation: 1,
+      animationStep: 5,
+      foregroundBorderWidth: 5,
+      backgroundBorderWidth: 5,
+      percent: <%= @redeemed_percentage.to_i %>,
+      textSize: 10,
+      textStyle: 'font-size: 10px;',
+      textColor: '#000000',
+      fontWeight: 300,
+      multiPercentage: 1,
+      percentages: [10, 20, 30],
+      fontColor: '#E41C39',
+      foregroundColor: '#E41C39',
+      percentageY: 105
+  });
+});
+</script>
+
+
+
+
+
+<!-- Raw Data -->
+<!-- <h3>DashBoard</h3>
 <div>ACTIVE CARDS: <b><%= @active_cards %></b></div>
 <div>REDEEMED TODAY: <b><%= @redeemed_today %></b></div>
 <div>Total Gift Card Balance: <b><%= @total_gift_card_balance %></b></div>
 <div>Gift Cards Expired this month: <b><%= @expired_cards %></b></div>
 <div>Redeemed Last 30 Days: <b><%= @redeemed_this_month %></b></div>
-<div>Total Redeemed:<b><%= @redeemed_percentage.to_i %>%</b></div>
+<div>Total Redeemed:<b><%= @redeemed_percentage.to_i %>%</b></div> -->
 
-<div>Monthly Summary</div>
-<table border="1">
-  <tr>
-    <th>Date</th>
-    <th>Redeemed Amount</th>
-  </tr>
-<% @monthly_summary.each do |k,v| %>
-  <tr>
-    <td><%= k %></td>
-    <td><%= v.to_i %></td>
-  </tr>
-<% end %>
-</table>
+
+
+
+
+ <div class="input-group">
+
+
+  <% end %>
+</div>
+<%= render partial: "layouts/modal_window", locals: { modal_id: 'reportModel' } %>

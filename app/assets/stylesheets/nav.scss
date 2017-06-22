@@ -1,9 +1,16 @@
 // Navigation
 
-.nav-logo{
-  min-height: 70px;
-  //margin: 10px 0;
-  position: relative;
+
+
+@media(min-width: 760px){
+  .nav-logo{
+    min-height: 70px;
+    //margin: 10px 0;
+    position: relative;
+  }
+  .navbar-toggle{
+    top: 9px
+  }
 }
 .container-fluid.logo-margin{
   //margin-left:-15px;
@@ -21,13 +28,19 @@
   color:#fff;
 }
 
+.navbar-inverse .navbar-nav > .active > a:hover{
+    background: transparent;
+}
+.navbar-inverse .navbar-nav > .active > a{
+  background: transparent;
+border-bottom: 1px solid #fff;
+}
+
 .navbar-right{
   position:relative;
   top: 9px;
 }
-.navbar-toggle{
-  top: 9px
-}
+
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
   background: transparent;
