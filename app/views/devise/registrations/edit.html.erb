@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h3>Edit Account<!-- <%= resource_name.to_s.humanize %> --></h3>
+      <h3>Change Password</h3>
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
 <div class="flash-messages">
         <%= devise_error_messages! %>
@@ -13,36 +13,28 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+        <%= f.text_field :name, disabled: true, class: 'form-control' %>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
         <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control' %>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
+        <%= f.email_field :email, disabled: true, class: 'form-control' %>
       </div>
     </div>
   </div>
 </fieldset>
       <fieldset class="well">
         <div class="row">
-            <div class="col-sm-12">
-                    <p>Leave these fields blank if you don't want to change your password.</p>
-            </div>
-        </div>
-        <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
               <%= f.label :password %>
-              <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+              <%= f.password_field :password, autofocus: true, :autocomplete => 'off', class: 'form-control' %>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <%= f.label :password_confirmation %>
+              <%= f.label "Confirm Password" %>
               <%= f.password_field :password_confirmation, class: 'form-control' %>
             </div>
           </div>
@@ -51,7 +43,7 @@
 <fieldset class="well">
   <div class="row">
     <div class="col-sm-12">
-          <p>You must enter your current password to make changes.</p>
+          <p>You must enter your current password to change password.</p>
     </div>
   </div>
   <div class="row">
@@ -65,7 +57,7 @@
 </fieldset>
       <div class="row">
         <div class="col-sm-12 authform marg-btn">
-          <%= f.submit 'Update', :class => 'button' %>
+          <%= f.submit 'Change Password', :class => 'button' %>
         <% end %>
         </div>
       </div>
