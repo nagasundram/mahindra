@@ -1,3 +1,4 @@
+<!-- Edit Account Template -->
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
@@ -26,35 +27,26 @@
 </fieldset>
       <fieldset class="well">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="form-group">
-              <%= f.label :password %>
-              <%= f.password_field :password, autofocus: true, :autocomplete => 'off', class: 'form-control' %>
+              <%= f.label :current_password %>
+              <%= f.password_field :current_password, class: 'form-control', required: 'true' %>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="form-group">
-              <%= f.label "Confirm Password" %>
-              <%= f.password_field :password_confirmation, class: 'form-control' %>
+              <%= f.label "New Password" %>
+              <%= f.password_field :password, autofocus: true, :autocomplete => 'off', class: 'form-control', required: 'true' %>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <%= f.label "Confirm New Password" %>
+              <%= f.password_field :password_confirmation, class: 'form-control', required: 'true' %>
             </div>
           </div>
         </div>
       </fieldset>
-<fieldset class="well">
-  <div class="row">
-    <div class="col-sm-12">
-          <p>You must enter your current password to change password.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password, class: 'form-control' %>
-      </div>
-    </div>
-  </div>
-</fieldset>
       <div class="row">
         <div class="col-sm-12 authform marg-btn">
           <%= f.submit 'Change Password', :class => 'button' %>

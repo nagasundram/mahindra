@@ -6,11 +6,11 @@
     <h3></h3>
     <div class="form-group">
 
-    <%= text_field_tag(:card_number, '', :autofocus => true, class: 'form-control', required: true, placeholder: 'Gift Card Number') %>
+    <%= text_field_tag(:card_number, '', :autofocus => true, class: 'form-control', required: 'true', placeholder: 'Gift Card Number', pattern:'^\d{16}$') %>
     </div>
     <div class="form-group">
 
-      <%= password_field_tag(:pin, '', class: 'form-control', required: true, placeholder:'PIN') %>
+      <%= password_field_tag(:pin, '', class: 'form-control', required: 'true', placeholder:'PIN', pattern:'^\d{6}$' ) %>
     </div>
     <div class="center">
       <%= submit_tag("Validate", :class => 'btn btn-primary') %>
