@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :gift_cards do
     collection do
-      get 'validate'
+      post 'validate'
     end
   end
 
