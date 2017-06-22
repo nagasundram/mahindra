@@ -9,22 +9,27 @@
 
 <h4><%= link_to 'Go to Transaction Audits', audits_transactions_path %></h4>
 
-
 <table>
-  <th><%= sortable "created_at", "Date" %></th>
-  <th>Invoice Number</th>
-  <th>Store Code</th>
-  <th>Store Name</th>
-  <th>Redeemed</th>
-  <th>Balance</th>
-  <th>Action</th>
-  <% @transactions.each do |transaction| %>
-    <tr>
-      <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
-      <td>
-        <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
-      </td>
-    </tr>
+  <tr>
+    <th><%= sortable "created_at", "Date" %></th>
+    <th>Invoice Number</th>
+    <th>Store Code</th>
+    <th>Store Name</th>
+    <th>Redeemed</th>
+    <th>Balance</th>
+    <th>Action</th>
+  </tr>
+  <% if @transactions.present? %>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+        <td>
+          <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
+        </td>
+      </tr>
+    <% end %>
+    <% else %>
+      <tr><td> No results found</td></tr>
   <% end %>
 </table>
 <%= render partial: "layouts/modal_window", locals: { modal_id: 'editTransaction' } %>
