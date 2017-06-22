@@ -9,6 +9,9 @@
     </div>
      <div class="center">
        <%= f.submit 'Reset Password', :class => 'button' %>
+       <div class="forgot-password">
+         <%= link_to "Login", user_session_path, class: '' %>
+       </div>
      </div>
   <% end %>
 </div>
