@@ -59,6 +59,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.csv { send_data @transactions.to_csv }
     end
   end
 

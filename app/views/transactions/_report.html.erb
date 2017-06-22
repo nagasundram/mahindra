@@ -5,25 +5,27 @@
       <h4 class="modal-title">Transactions</h4>
     </div>
     <div class="modal-body">
+    <% params = request.query_parameters %>
+      <%= link_to "Export", report_transactions_path({format: "csv", start_date: params["start_date"], end_date: params["end_date"]}) %>
     <table>
       <tr>
-        <th>Date</th>
+        <th>Transaction Date</th>
         <th>Invoice Number</th>
         <th>Gift Card Number</th>
         <th>Store Code</th>
         <th>Store Name</th>
-        <th>Redeemed</th>
-        <th>Balance</th>
+        <th>Gift Card Balance</th>
+        <th>Amount Redeemed</th>
       </tr>
       <% transactions.each do|transaction| %>
         <tr>
-          <td><%= transaction.updated_at.strftime("%d/%m/%Y") %></td>
+          <td><%= transaction.formatted_created_at %></td>
           <td><%= transaction.invoice_number %></td>
           <td><%= transaction.gift_card.card_number %></td>
           <td><%= transaction.user.store_code %></td>
           <td><%= transaction.user.store_name %></td>
-          <td><%= transaction.redeemed_value %></td>
           <td><%= transaction.current_balance %></td>
+          <td><%= transaction.redeemed_value %></td>
         </tr>
       <% end %>
     </table>
