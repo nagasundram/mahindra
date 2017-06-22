@@ -8,7 +8,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @gift_card = GiftCard.find(params[:id])
+    @gift_card = GiftCard.find(decrypt_data(params[:id]))
     @transaction = Transaction.new
     respond_to do |format|
       format.html

@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="col-sm-6 redeem-btn">
-    <%= link_to "Redeem", new_transaction_path(id: @gift_card),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'} %>
+    <%= link_to "Redeem", new_transaction_path(id: encrypt_data(@gift_card.id)),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'} %>
     <%= render partial: "layouts/modal_window", locals: { modal_id: 'redeemModal' } %>
   </div>
 </div>

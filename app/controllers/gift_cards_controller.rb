@@ -53,16 +53,6 @@ class GiftCardsController < ApplicationController
 
   private
 
-  def encrypt_data(data)
-    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
-    return crypt.encrypt_and_sign(data)
-  end
-
-  def decrypt_data(data)
-     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
-     return crypt.decrypt_and_verify(data)
-  end
-
   def sort_column
     GiftCard.column_names.include?(params[:sort]) ? params[:sort] : "expiry"
   end
