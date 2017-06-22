@@ -5,20 +5,24 @@
     <th>View changes</th>
     <th>Remarks</th>
   </tr>
-  <% @gift_card_audits.each do |audit| %>
-    <tr>
-      <td><%= audit.created_at.strftime("%d/%m/%Y") %></td>
-      <td><%= GiftCard.find(audit.auditable_id).card_number %></td>
-      <td>
-        <% audit.audited_changes.each do |change| %>
-          <div class="inline"><%= change[0].titlecase %>: </div>
-          <div class="inline"><%= change[1][0] %> </div>
-          <div class="inline">To </div>
-          <div><%= change[1][1] %></div>
-        <% end %>
-      </td>
-      <td><%= popover("Remarks", "#{audit.comment}") %></td>
-    </tr>
+  <% if @gift_card_audits.present? %>
+    <% @gift_card_audits.each do |audit| %>
+      <tr>
+        <td><%= audit.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= GiftCard.find(audit.auditable_id).card_number %></td>
+        <td>
+          <% audit.audited_changes.each do |change| %>
+            <div class="inline"><%= change[0].titlecase %>: </div>
+            <div class="inline"><%= change[1][0] %> </div>
+            <div class="inline">To </div>
+            <div><%= change[1][1] %></div>
+          <% end %>
+        </td>
+        <td><%= popover("Remarks", "#{audit.comment}") %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr><td>No Gift Card Audits Found</td></tr>
   <% end %>
 </table>
 <style type="text/css">

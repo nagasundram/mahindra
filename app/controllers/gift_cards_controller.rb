@@ -10,6 +10,9 @@ class GiftCardsController < ApplicationController
 
   def validate
     authorize! :validate, GiftCard
+    unless params[:card_number].length == 16 && params[:pin] == 6
+      redirect_to root_path, alert: "Please enter proper card number and pin" and return
+    end
     @gift_card = GiftCard.find_by_card_number_and_pin(params[:card_number], params[:pin])
     if @gift_card.present?
       redirect_to gift_card_path(id: encrypt_data(@gift_card.id))
@@ -20,7 +23,7 @@ class GiftCardsController < ApplicationController
 
   def show
     authorize! :read, GiftCard
-    @gift_card = GiftCard.find_by(id: decrypt_data(params[:id]))
+    @gift_card = GiftCard.find(decrypt_data(params[:id]))
     if @gift_card.present?
       @transactions = @gift_card.transactions.order('created_at desc').limit(5)
     else
@@ -30,7 +33,7 @@ class GiftCardsController < ApplicationController
 
   def edit
     authorize! :edit, GiftCard
-    @gift_card = GiftCard.find(params[:id])
+    @gift_card = GiftCard.find(decrypt_data(params[:id]))
     respond_to do |format|
       format.html
       format.js
