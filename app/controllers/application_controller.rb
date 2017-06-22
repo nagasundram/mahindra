@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
+   rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+   end
+
+   rescue_from ActiveSupport::MessageVerifier::InvalidSignature do |exception|
+    redirect_to root_url
+   end
+
 end

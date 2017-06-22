@@ -17,7 +17,7 @@
           <div><%= change[1][1] %></div>
         <% end %>
       </td>
-      <td><%= audit.comment %></td>
+      <td><%= popover("Remarks", "#{audit.comment}") %></td>
     </tr>
   <% end %>
 </table>
@@ -25,3 +25,11 @@
   div.inline { float:left; }
   .clearBoth { clear:both; }
 </style>
+
+<script type="text/javascript">
+  $("[data-pop-over]").popover({
+      placement: 'auto',
+      animation: true,
+      trigger: "click hover focus"
+    });
+</script>

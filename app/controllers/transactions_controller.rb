@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    authorize! :manage, Transaction
     @transactions = Transaction.joins(:user,:gift_card).where("users.store_code like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search]}%","%#{params[:search]}%", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
   end
 
@@ -17,6 +18,7 @@ class TransactionsController < ApplicationController
 
 
   def create
+    authorize! :create, Transaction
     @transaction = current_user.transactions.new(transaction_params)
     @transaction.current_balance = @transaction.gift_card.balance - @transaction.redeemed_value
     respond_to do |format|
@@ -41,6 +43,7 @@ class TransactionsController < ApplicationController
   end
 
   def update
+    authorize! :update, Transaction
     @transaction = Transaction.find(params[:id])
     respond_to do |format|
       if @transaction.update_attributes(update_params)
@@ -55,6 +58,7 @@ class TransactionsController < ApplicationController
   end
 
   def report
+    authorize! :read, Transaction
     @transactions = Transaction.where(updated_at: params[:start_date].to_date..params[:end_date].to_date)
     respond_to do |format|
       format.html
@@ -64,6 +68,7 @@ class TransactionsController < ApplicationController
   end
 
   def audits
+    authorize! :read, Transaction
     @audits = Audited::Audit.where(action: 'update', auditable_type: 'Transaction', user_id: 1).order('created_at desc')
   end
 
