@@ -10,14 +10,14 @@ class GiftCardsController < ApplicationController
   def validate
     @gift_card = GiftCard.find_by_card_number_and_pin(params[:card_number], params[:pin])
     if @gift_card.present?
-      redirect_to gift_card_path(id: @gift_card.id)
+      redirect_to gift_card_path(id: encrypt_data(@gift_card.id))
     else
       redirect_to root_path, alert: "Invalid Gift Card Credentials"
     end
   end
 
   def show
-    @gift_card = GiftCard.find_by(id: params[:id])
+    @gift_card = GiftCard.find_by(id: decrypt_data(params[:id]))
     if @gift_card
       @transactions = @gift_card.transactions.order('created_at desc').limit(5)
     else
@@ -47,6 +47,16 @@ class GiftCardsController < ApplicationController
   end
 
   private
+
+  def encrypt_data(data)
+    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
+    return crypt.encrypt_and_sign(data)
+  end
+
+  def decrypt_data(data)
+     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
+     return crypt.decrypt_and_verify(data)
+  end
 
   def sort_column
     GiftCard.column_names.include?(params[:sort]) ? params[:sort] : "expiry"
