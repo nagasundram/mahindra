@@ -1,36 +1,59 @@
-<div class="input-group">
-  <%= form_tag(transactions_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Store Code/Gift Card/Invoice Number", class: 'form-control' %>
-    <span class="input-group-btn">
-       <%= submit_tag "Search", class: 'btn btn-success' %>
-    </span>
-  <% end %>
+<!-- Transactions Template -->
+
+<div class="container common-wrap">
+<div class="row">
+  <div class="col-sm-6">
+<h4>  <a href="<%= audits_transactions_path %>" class="anchor-title btn btn-primary">Go to Transaction Audits</a></h4>
+      <!-- <h4><%= link_to 'Go to Transaction Audits', audits_transactions_path %></h4> -->
+  </div>
+  <div class="col-sm-6 search-bar">
+    <div class="search-bar">
+      <%= form_tag(transactions_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Store Code/Gift Card/Invoice Number", class: 'form-control' %>
+           <%= submit_tag "Search", class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<h4><%= link_to 'Go to Transaction Audits', audits_transactions_path %></h4>
-
-<table>
-  <tr>
-    <th><%= sortable "created_at", "Date" %></th>
-    <th>Invoice Number</th>
-    <th>Store Code</th>
-    <th>Store Name</th>
-    <th>Redeemed</th>
-    <th>Balance</th>
-    <th>Action</th>
-  </tr>
-  <% if @transactions.present? %>
-    <% @transactions.each do |transaction| %>
+<div class="row">
+  <div class="col-sm-12">
+      <div class="table-responsive data-tables admin-tables">
+    <table class="table">
+        <% if @transactions.present? %>
       <tr>
-        <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
-        <td>
-          <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
-        </td>
+        <th class="date-filter">Date <%= sortable "created_at", "" %></th>
+        <th>Invoice Number</th>
+        <th>Store Code</th>
+        <th>Store Name</th>
+        <th>Redeemed</th>
+        <th>Balance</th>
+        <th>Action</th>
       </tr>
-    <% end %>
-    <% else %>
-      <tr><td> No results found</td></tr>
-  <% end %>
-</table>
-<%= render partial: "layouts/modal_window", locals: { modal_id: 'editTransaction' } %>
-<%= paginate @transactions %>
+      <% end %>
+      <% if @transactions.present? %>
+        <% @transactions.each do |transaction| %>
+          <tr>
+    <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+            <td>
+              <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
+            </td>
+          </tr>
+        <% end %>
+        <% else %>
+          <tr><th> No results found</th></tr>
+          <tr>
+            <td class="no-results">
+<a href="<%= transactions_path %>" class="btn btn-primary">View all transactions</a>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+    <%= render partial: "layouts/modal_window", locals: { modal_id: 'editTransaction' } %>
+    <%= paginate @transactions %>
+
+  </div>
+</div>
+
+</div> <!-- Container -->

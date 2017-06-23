@@ -3,7 +3,7 @@
 <div class="validate-outer">
 <div class="authform">
   <%= form_tag(validate_gift_cards_path, :html => {:autocomplete => "false"}) do |f| %>
-    <h3></h3>
+    <h3 class="card-title text-center">Validate Gift Card</h3>
     <div class="form-group">
 
     <%= text_field_tag(:card_number, '', :autofocus => true, class: 'form-control', required: 'true', placeholder: 'Gift Card Number', pattern:'^\d{16}$') %>
@@ -21,5 +21,71 @@
 </div>
 
 <script>
+// Catch all events related to changes
+$('#card_number').on('change keyup', function() {
+  // Remove invalid characters
+  var sanitized = $(this).val().replace(/[^0-9]/g, '');
+  // Update value
+  $(this).val(sanitized);
+});
+</script>
+
+<script>
   $(".validate-outer").backstretch("<%= asset_path "auth-bg.jpg" %>");
+</script>
+
+<script>
+(function (exports) {
+  function valOrFunction(val, ctx, args) {
+      if (typeof val == "function") {
+          return val.apply(ctx, args);
+      } else {
+          return val;
+      }
+  }
+
+  function InvalidInputHelper(input, options) {
+      input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+
+      function changeOrInput() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+              input.setCustomValidity("");
+          }
+      }
+
+      function invalid() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+             input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+          }
+      }
+
+      input.addEventListener("change", changeOrInput);
+      input.addEventListener("input", changeOrInput);
+      input.addEventListener("invalid", invalid);
+  }
+  exports.InvalidInputHelper = InvalidInputHelper;
+})(window);
+
+
+
+InvalidInputHelper(document.getElementById("card_number"), {
+  defaultText: "Please enter the Gift Card number",
+  emptyText: "Please enter the Gift Card number",
+  invalidText: function (input) {
+      return 'Gift Card should have 16 digits.';
+  }
+});
+
+InvalidInputHelper(document.getElementById("pin"), {
+  defaultText: "Please enter the PIN",
+  emptyText: "Please enter PIN",
+  invalidText: function (input) {
+      return 'PIN should be 6 digits';
+  }
+});
+
 </script>

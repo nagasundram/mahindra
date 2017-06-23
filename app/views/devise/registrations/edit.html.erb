@@ -25,7 +25,7 @@
     </div>
   </div>
 </fieldset>
-      <fieldset class="well">
+      <fieldset class="well1">
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
@@ -55,12 +55,85 @@
       </div>
 </div>
 
+
+
+
+
 <script>
    $('.flash-messages').addClass('animated slideInDown');
 
       setTimeout(function(){
          $(".flash-messages").addClass("animated slideOutUp");
      }, 3000);
+</script>
+
+
+<script>
+(function (exports) {
+  function valOrFunction(val, ctx, args) {
+      if (typeof val == "function") {
+          return val.apply(ctx, args);
+      } else {
+          return val;
+      }
+  }
+
+  function InvalidInputHelper(input, options) {
+      input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+
+      function changeOrInput() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+              input.setCustomValidity("");
+          }
+      }
+
+      function invalid() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+             input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+          }
+      }
+
+      input.addEventListener("change", changeOrInput);
+      input.addEventListener("input", changeOrInput);
+      input.addEventListener("invalid", invalid);
+  }
+  exports.InvalidInputHelper = InvalidInputHelper;
+})(window);
+
+
+
+InvalidInputHelper(document.getElementById("user_current_password"), {
+  defaultText: "Enter your current password",
+  emptyText: "Enter your current password",
+});
+
+InvalidInputHelper(document.getElementById("user_password"), {
+  defaultText: "Enter your new password",
+  emptyText: "Enter your new password",
+});
+
+InvalidInputHelper(document.getElementById("user_password_confirmation"), {
+  defaultText: "Re-enter your new password",
+  emptyText: "Re-enter your new password",
+});
+
+var password = document.getElementById("user_password")
+  , confirm_password = document.getElementById("user_password_confirmation");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+user_password.onchange = validatePassword;
+user_password_confirmation.onkeyup = validatePassword;
 
 
 </script>

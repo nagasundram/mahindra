@@ -1,0 +1,37 @@
+
+
+.search-bar{
+  display: block;
+}
+.anchor-title{
+  text-decoration:none!important;
+  }
+
+#search-form{
+  display: flex;
+  align-items: right;
+  input{
+    margin-right: 10px;
+  }
+}
+
+.date-filter a{
+    margin-right: 10px;
+    font-size: 10px;
+    text-decoration:none;
+}
+
+.admin-tables{
+  td{
+    position: relative;
+    top:7px;
+  }
+  a{
+    position: relative;
+    top:-7px;
+  }
+}
+
+.no-results{
+  border: none!important;
+}

@@ -1,3 +1,4 @@
+<!-- Edit Transaction Modal Template -->
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -7,35 +8,63 @@
     <div class="modal-body">
       <%= form_for(@transaction, html: {method: :put}, remote: true) do |f|  %>
         <div id="error_explanation"></div>
-        <div class="form-group">
-          <%= label_tag(:card_number, "Gift Card Number") %>
-          <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
-        </div>
-        <div class="form-group">
-          <%= label_tag(:expiry, "Expiration Date") %>
-          <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
-        </div>
-        <div class="form-group">
-          <%= label_tag(:balance, "Gift Card Balance") %>
-          <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
-        </div>
-        <div class="form-group">
-          <%= label_tag(:store_code, "Store Code") %>
-          <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: @transaction.user.store_code) %>
-        </div>
-        <%= f.hidden_field :gift_card_id, value: @gift_card.id %>
-        <div class="form-group">
-          <%= f.text_field :invoice_number, placeholder: 'Invoice Number', :autofocus => true, class: 'form-control', required: true %>
-        </div>
-        <div class="form-group">
-          <%= f.text_field :redeemed_value, placeholder: 'Amount', class: 'form-control', required: true %>
-        </div>
+
+<div class="well">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:card_number, "Gift Card Number") %>
+        <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:expiry, "Expiration Date") %>
+        <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:balance, "Gift Card Balance") %>
+        <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= label_tag(:store_code, "Store Code") %>
+        <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: @transaction.user.store_code) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <%= f.hidden_field :gift_card_id, value: @gift_card.id %>
+    <div class="form-group">
+      <label for="invoice_number">Invoice Number</label>
+      <%= f.text_field :invoice_number, placeholder: 'Invoice Number', :autofocus => true, class: 'form-control', required: 'true', pattern:'{1,30}' %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="redeemed_value">Amount</label>
+      <%= f.text_field :redeemed_value, placeholder: 'Amount', class: 'form-control', required: 'true', pattern:'^\d{1,10}$'  %>
+    </div>
+  </div>
+</div>
+
         <% params = request.query_parameters %>
         <%= hidden_field_tag(:page, '', value: params[:page])%>
         <%= hidden_field_tag(:search,'', value: params[:search]) %>
         <%= hidden_field_tag(:direction,'', value: params[:direction]) %>
         <div class="form-group">
-          <%= text_field_tag(:audit_comment, '', placeholder: 'Comment', class: 'form-control') %>
+          <label for="remarks">Remarks <span class="required-field">*</span></label>
+          <%= text_area_tag(:audit_comment, '', placeholder: 'Remarks', class: 'form-control', required:'true') %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -45,3 +74,75 @@
     <% end %>
   </div>
 </div>
+
+<script>
+
+// $( document ).ready(function() {
+//   (function (exports) {
+//     function valOrFunction(val, ctx, args) {
+//         if (typeof val == "function") {
+//             return val.apply(ctx, args);
+//         } else {
+//             return val;
+//         }
+//     }
+//
+//     function InvalidInputHelper(input, options) {
+//         input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+//
+//         function changeOrInput() {
+//             if (input.value == "") {
+//                 input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+//             } else {
+//                 input.setCustomValidity("");
+//             }
+//         }
+//
+//         function invalid() {
+//             if (input.value == "") {
+//                 input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+//             } else {
+//                input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+//             }
+//         }
+//
+//         input.addEventListener("change", changeOrInput);
+//         input.addEventListener("input", changeOrInput);
+//         input.addEventListener("invalid", invalid);
+//     }
+//     exports.InvalidInputHelper = InvalidInputHelper;
+//   })(window);
+//
+//
+//
+//
+//   InvalidInputHelper(document.getElementById("transaction_invoice_number"), {
+//     defaultText: "Please enter Invoice number",
+//     emptyText: "Please enter Invoice number",
+//     invalidText: function (input) {
+//         return 'Invalid Invoice Number';
+//     }
+//   });
+//
+//   InvalidInputHelper(document.getElementById("transaction_redeemed_value"), {
+//     defaultText: "Please enter Amount",
+//     emptyText: "Please enter Amount",
+//     invalidText: function (input) {
+//         return 'Amount invalid';
+//     }
+//   });
+//
+//
+//   InvalidInputHelper(document.getElementById("audit_comment"), {
+//     defaultText: "Please enter remarks",
+//     emptyText: "Please enter remarks",
+//     // invalidText: function (input) {
+//     //     return 'Amount invalid';
+//     // }
+//   });
+// });
+
+
+
+
+</script>

@@ -42,11 +42,19 @@ $grey: #999;
 }
 
 .flash-messages{
-  position: fixed;
-  top:10px;
-  left: 36%;
-  z-index: 99999999;
-  min-width: 300px;
+  // position: fixed;
+  // top:10px;
+  // margin: 5% auto;
+  // z-index: 99999999;
+  // min-width: 300px;
+position: fixed;
+width: 300px;
+height: 200px;
+top: 15%;
+left: 50%;
+margin-top: -100px; /* Negative half of height. */
+margin-left: -150px; /* Negative half of width. */
+z-index: 999999;
 }
 .modal-header{
 background: red;
