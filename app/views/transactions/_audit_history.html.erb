@@ -1,3 +1,4 @@
+<!-- Audit Transaction Modal Content -->
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -5,9 +6,29 @@
       <h4 class="modal-title">Transactions</h4>
     </div>
     <div class="modal-body">
-      <div>Invoice Number: <%= transaction.invoice_number %></div>
-      <div>Gift Card Number: <%= transaction.gift_card.card_number %></div>
-      <div>Gift Card Current Balance: <%= transaction.gift_card.balance %></div>
+            <div class="well">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="inv_number">Invoice Number: </label>
+                    <%= transaction.invoice_number %>
+                </div>
+                <div class="col-sm-6">
+                  <label for="gc_number">Gift Card Number: </label>
+              <%= transaction.gift_card.card_number %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="gc_current_balance">Gift Card Current Balance: </label>
+                <%= transaction.gift_card.balance %>
+                </div>
+                <div class="col-sm-6">
+                  <label for="exp_date">Expiration Date: </label>
+                <%= transaction.gift_card.formatted_expiry %>
+                </div>
+              </div>
+            </div>
+
       <div>
         <h5>Redeemed Amount Changes</h5>
         <div class="row">
@@ -49,7 +70,7 @@
           <% end %>
         <% end %>
       </div>
-    </div>
+    </div> <!-- /Modal Body -->
   </div>
 </div>
 <script type="text/javascript">

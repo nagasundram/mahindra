@@ -2,38 +2,44 @@
 <div class="container common-wrap">
   <div class="row">
     <div class="col-sm-12">
-      <h4>  <a href="<%= transactions_path %>" class="anchor-title">Go to Transactions</a></h4>
+      <h4>  <a href="<%= transactions_path %>" class="anchor-title btn btn-primary">View Transactions</a></h4>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive data-tables admin-tables">
+      <table class="table">
+        <tr>
+          <th>Invoice Number</th>
+          <th>Gift Card Number</th>
+          <th>Last Edited</th>
+          <th>Action</th>
+        </tr>
+        <% if @audits.present? %>
+          <% @audits.group_by(&:auditable_id).each do |transaction_id, audit_history| %>
+            <% @transaction = Transaction.find(transaction_id) %>
+              <tr>
+                <td><%= @transaction.invoice_number %></td>
+                <td><%= @transaction.gift_card.card_number %></td>
+                <td><%= audit_history[0].created_at.strftime("%d/%m/%Y") %></td>
+                <td>
+                  <a href="#" data-toggle="modal" data-target="#history-<%= transaction_id %>" class="btn btn-primary">
+                    Details
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <div class="modal fade" id="history-<%= transaction_id %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                  <%= render partial: "transactions/audit_history", locals: { audits: audit_history, transaction: @transaction } %>
+                </div>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr><td>No Transaction Audits Found</td></tr>
+          <% end %>
+      </table>
+    </div>
+    </div>
+  </div>
 
-<table border="1">
-  <tr>
-    <th>Invoice Number</th>
-    <th>Gift Card Number</th>
-    <th>Last Edited</th>
-    <th>....</th>
-  </tr>
-  <% if @audits.present? %>
-    <% @audits.group_by(&:auditable_id).each do |transaction_id, audit_history| %>
-      <% @transaction = Transaction.find(transaction_id) %>
-        <tr>
-          <td><%= @transaction.invoice_number %></td>
-          <td><%= @transaction.gift_card.card_number %></td>
-          <td><%= audit_history[0].created_at.strftime("%d/%m/%Y") %></td>
-          <td>
-            <a href="#" data-toggle="modal" data-target="#history-<%= transaction_id %>">
-              View more...
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <div class="modal fade" id="history-<%= transaction_id %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <%= render partial: "transactions/audit_history", locals: { audits: audit_history, transaction: @transaction } %>
-          </div>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr><td>No Transaction Audits Found</td></tr>
-    <% end %>
-</table>
+</div> <!-- /Container -->

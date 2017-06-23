@@ -1,18 +1,27 @@
-<h3>Gift Cards</h3>
-<div class="input-group">
-  <%= form_tag(gift_cards_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Gift Card", class: 'form-control' %>
-    <span class="input-group-btn">
-       <%= submit_tag "Search", class: 'btn btn-success' %>
-    </span>
-  <% end %>
-</div>
+<div class="container common-wrap">
+  <div class="row">
+    <div class="col-sm-6">
+  <h4><a href="#" class="btn btn-primary">Gift Cards Audit</a></h4>
+        <!-- <h4><%= link_to 'Go to Transaction Audits', audits_transactions_path %></h4> -->
+    </div>
+    <div class="col-sm-6 search-bar">
+      <div class="search-bar">
+        <%= form_tag(gift_cards_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Gift Card Number", class: 'form-control', maxlength:'16' %>
+           <%= submit_tag "Search", class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<table border=1>
+  <div class="row">
+<div class="col-sm-12">
+  <div class="table-responsive data-tables admin-tables">
+<table class="table">
   <tr>
     <th>Gift Card Number</th>
     <th>Balance</th>
-    <th><%= sortable "expiry", "Expiry" %></th>
+    <th>Expiry <%= sortable "expiry", "" %></th>
     <th>Action</th>
   </tr>
   <% if @gift_cards.present? %>
@@ -27,7 +36,14 @@
 </table>
 <%= render partial: "layouts/modal_window", locals: { modal_id: 'editGiftCard' } %>
 <%= paginate @gift_cards %>
-<hr/>
 
-<h3>Gift Cards Audits</h3>
-<%= render "gift_cards/audits" %>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!--
+    <h4>Gift Cards Audits</h4>
+<%= render "gift_cards/audits" %> -->
