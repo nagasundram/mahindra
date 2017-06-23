@@ -8,7 +8,9 @@
     </div>
     <div class="modal-body">
       <%= form_for(@transaction, html: {method: :post}, remote: true) do |f|  %>
+
         <div id="error_explanation"></div>
+      
 <!-- Populate Data -->
 <div class="row">
   <div class="col-sm-6">
@@ -64,3 +66,61 @@
     <% end %>
   </div>
 </div>
+
+
+<script>
+(function (exports) {
+  function valOrFunction(val, ctx, args) {
+      if (typeof val == "function") {
+          return val.apply(ctx, args);
+      } else {
+          return val;
+      }
+  }
+
+  function InvalidInputHelper(input, options) {
+      input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+
+      function changeOrInput() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+              input.setCustomValidity("");
+          }
+      }
+
+      function invalid() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+             input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+          }
+      }
+
+      input.addEventListener("change", changeOrInput);
+      input.addEventListener("input", changeOrInput);
+      input.addEventListener("invalid", invalid);
+  }
+  exports.InvalidInputHelper = InvalidInputHelper;
+})(window);
+
+
+
+InvalidInputHelper(document.getElementById("transaction_invoice_number"), {
+  defaultText: "Please enter Invoice Number",
+  emptyText: "Please enter Invoice Number",
+  invalidText: function (input) {
+      return 'Invalid Invoice number';
+  }
+});
+
+InvalidInputHelper(document.getElementById("transaction_redeemed_value"), {
+  defaultText: "Please enter Amount",
+  emptyText: "Please enter Amount",
+  invalidText: function (input) {
+      return 'Invalid Amount';
+  }
+});
+
+
+</script>
