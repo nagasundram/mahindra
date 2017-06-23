@@ -22,6 +22,7 @@ class TestDataService
         gd.pin = "123456"
         gd.balance = 10000
         gd.expiry = Time.now + 90.days
+        gd.username = "Anand"
       end
   end
 end
