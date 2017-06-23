@@ -10,6 +10,9 @@ class GiftCardsController < ApplicationController
 
   def validate
     authorize! :validate, GiftCard
+    if params[:card_number].length != 16 || params[:pin].length != 6
+      redirect_to root_path, alert: "Please enter proper Gift Card Credentials" and return
+    end
     @gift_card = GiftCard.find_by_card_number_and_pin(params[:card_number], params[:pin])
     if @gift_card.present?
       redirect_to gift_card_path(id: encrypt_data(@gift_card.id))
