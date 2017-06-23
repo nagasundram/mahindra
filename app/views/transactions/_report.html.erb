@@ -17,17 +17,21 @@
         <th>Gift Card Balance</th>
         <th>Amount Redeemed</th>
       </tr>
-      <% transactions.each do|transaction| %>
-        <tr>
-          <td><%= transaction.formatted_created_at %></td>
-          <td><%= transaction.invoice_number %></td>
-          <td><%= transaction.gift_card.card_number %></td>
-          <td><%= transaction.user.store_code %></td>
-          <td><%= transaction.user.store_name %></td>
-          <td><%= transaction.current_balance %></td>
-          <td><%= transaction.redeemed_value %></td>
-        </tr>
-      <% end %>
+      <% if transactions.present? %>
+        <% transactions.each do|transaction| %>
+          <tr>
+            <td><%= transaction.formatted_created_at %></td>
+            <td><%= transaction.invoice_number %></td>
+            <td><%= transaction.gift_card.card_number %></td>
+            <td><%= transaction.user.store_code %></td>
+            <td><%= transaction.user.store_name %></td>
+            <td><%= transaction.current_balance %></td>
+            <td><%= transaction.redeemed_value %></td>
+          </tr>
+        <% end %>
+        <% else %>
+          <tr><td>No Transactions found</td></tr>
+        <% end %>
     </table>
     </div>
   </div>

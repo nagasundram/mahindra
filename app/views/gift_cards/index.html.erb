@@ -9,14 +9,20 @@
 </div>
 
 <table border=1>
-  <th>Gift Card Number</th>
-  <th>Balance</th>
-  <th><%= sortable "expiry", "Expiry" %></th>
-  <th>Action</th>
-  <% @gift_cards.each do |gift_card| %>
-    <tr>
-      <%= render partial: 'gift_cards/gift_card', locals: { gift_card: gift_card }%>
-    </tr>
+  <tr>
+    <th>Gift Card Number</th>
+    <th>Balance</th>
+    <th><%= sortable "expiry", "Expiry" %></th>
+    <th>Action</th>
+  </tr>
+  <% if @gift_cards.present? %>
+    <% @gift_cards.each do |gift_card| %>
+      <tr>
+        <%= render partial: 'gift_cards/gift_card', locals: { gift_card: gift_card }%>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr><td>No results found</td></tr>
   <% end %>
 </table>
 <%= render partial: "layouts/modal_window", locals: { modal_id: 'editGiftCard' } %>
