@@ -132,6 +132,7 @@ GEM
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
+    pg (0.21.0)
     public_suffix (2.0.5)
     puma (3.9.1)
     rack (2.0.3)
@@ -240,6 +241,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   mysql2 (~> 0.3.18)
+  pg
   puma (~> 3.7)
   rails (~> 5.1.1)
   rails_layout
@@ -257,4 +259,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.1
+   1.14.6
