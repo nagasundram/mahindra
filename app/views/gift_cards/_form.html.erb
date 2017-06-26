@@ -12,6 +12,7 @@
 
       <%= password_field_tag(:pin, '', class: 'form-control', required: 'true', placeholder:'PIN', pattern:'^\d{6}$' ) %>
     </div>
+
     <div class="center">
       <%= submit_tag("Validate", :class => 'btn btn-primary') %>
       <%= button_tag("Clear", type: :reset, :class => 'btn btn-danger') %>
@@ -21,13 +22,7 @@
 </div>
 
 <script>
-// Catch all events related to changes
-$('#card_number').on('change keyup', function() {
-  // Remove invalid characters
-  var sanitized = $(this).val().replace(/[^0-9]/g, '');
-  // Update value
-  $(this).val(sanitized);
-});
+$('#card_number').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
 </script>
 
 <script>
