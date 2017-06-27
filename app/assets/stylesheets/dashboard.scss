@@ -3,20 +3,23 @@
     color: #E41C39;
     font-weight: 300;
   }
-h2{
-  font-size: 50px;
-  small{
-    font-weight: 300;
-    font-size: 22px;
-    position:relative;
-    top: -10px;
+  h2{
+    font-size: 50px;
+    small{
+      font-weight: 300;
+      font-size: 22px;
+      position:relative;
+      top: -10px;
+    }
   }
 }
-}
 
-@media(min-width: 780px){
+@media(min-width: 768px){
   svg{
     width: 70%;
+  }
+  #report_btn{
+    margin-top: 25px;
   }
 }
 #redeemed-circle{
@@ -26,12 +29,12 @@ h2{
 }
 
 .data-insights{
-h2{
-  border: 1px solid #979797;
-  padding: 30px;
-  border-radius: 5px;
+  h2{
+    border: 1px solid #979797;
+    padding: 30px;
+    border-radius: 5px;
 
-}
+  }
 }
 
 .download-report{
