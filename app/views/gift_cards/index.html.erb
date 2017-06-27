@@ -30,7 +30,12 @@
       </tr>
     <% end %>
   <% else %>
-    <tr><td>No results found</td></tr>
+    <tr><td class="no-results">No results found</td></tr>
+              <tr>
+            <td class="no-results">
+              <%= link_to 'Gift Cards', gift_cards_path, class:'btn btn-primary' %>
+            </td>
+          </tr>
   <% end %>
 </table>
 <%= render partial: "layouts/modal_window", locals: { modal_id: 'editGiftCard' } %>

@@ -93,25 +93,36 @@
   <div class="col-sm-4">
     <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date" %>
   </div>
-
-
-     <script>
-  $( function() {
-    $( "#end_date" ).datepicker({maxDate: new Date(), dateFormat:" dd-mm-yy"});
-     $( "#start_date" ).datepicker({dateFormat:" dd-mm-yy"});
-  } );
-  </script>
-
-  </div>
-  <div class="col-sm-4">
+    <div class="col-sm-4">
     <span class="input-group-btn">
        <%= submit_tag "Export", class: 'btn btn-success' %>
     </span>
+  </div>
   </div>
 </div>
 </div>
 
 </div> <!-- /Container -->
+
+
+     <script>
+  $(document).ready(function(){
+    $("#start_date").datepicker({
+    maxDate: 0,
+    dateFormat: "dd-mm-yy",
+        onSelect: function(selected) {
+          $("#end_date").datepicker("option","minDate", selected)
+        }
+    });
+    $("#end_date").datepicker({ 
+    maxDate: 0,
+dateFormat: "dd-mm-yy",
+        onSelect: function(selected) {
+           $("#start_date").datepicker("option","maxDate", selected)
+        }
+    });  
+});
+  </script>
 
 <script>
 $( document ).ready(function() { // 6,32 5,38 2,34
@@ -172,5 +183,5 @@ sr.reveal('.dash2', {
 
   <% end %>
 </div>
-<div class="modal fade modal-lg" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade " id="reportModel" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 </div>
