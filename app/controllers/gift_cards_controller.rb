@@ -5,7 +5,6 @@ class GiftCardsController < ApplicationController
   def index
     authorize! :read_all, GiftCard
     @gift_cards = GiftCard.where("card_number like ?", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
-    @gift_card_audits = Audited::Audit.where(action: 'update', auditable_type: 'GiftCard', user_id: 1).order('created_at desc')
   end
 
   def validate
@@ -52,6 +51,11 @@ class GiftCardsController < ApplicationController
         format.json { render json: @gift_card.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def audits
+    authorize! :read, Transaction
+    @gift_card_audits = Audited::Audit.where(action: 'update', auditable_type: 'GiftCard', user_id: 1).order('created_at desc')
   end
 
   private

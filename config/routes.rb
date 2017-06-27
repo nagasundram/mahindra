@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :gift_cards do
     collection do
       post 'validate'
+      get 'audits'
     end
   end
 

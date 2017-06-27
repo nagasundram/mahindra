@@ -3,8 +3,7 @@
 <div class="container common-wrap">
 <div class="row">
   <div class="col-sm-6">
-<h4>  <a href="<%= audits_transactions_path %>" class="anchor-title btn btn-primary">Go to Transaction Audits</a></h4>
-      <!-- <h4><%= link_to 'Go to Transaction Audits', audits_transactions_path %></h4> -->
+  <%= link_to "Go to Transaction Audits", audits_transactions_path, class: 'anchor-title btn btn-primary' %>
   </div>
   <div class="col-sm-6 search-bar">
     <div class="search-bar">
@@ -44,7 +43,7 @@
           <tr><th> No results found</th></tr>
           <tr>
             <td class="no-results">
-<a href="<%= transactions_path %>" class="btn btn-primary">View all transactions</a>
+              <%= link_to "View all transactions", transactions_path, class: 'btn btn-primary' %>
             </td>
           </tr>
       <% end %>
