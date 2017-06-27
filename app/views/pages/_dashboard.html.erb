@@ -45,27 +45,27 @@
       </div>
   </div>
 
-<div class="row data-insights">
+<div class="row data-insights dash1">
   <div class="col-sm-6">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 gc_balance">
         <h2 class="text-center"><%= @total_gift_card_balance %> <small>Total Gift Card Balance</small></h2>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 active-cards">
         <h2 class="text-center"><%= @active_cards %> <small>Active Gift Cards</small></h2>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row data-insights">
+<div class="row data-insights dash1">
   <div class="col-sm-6">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 redeemed-this-month">
         <h2 class="text-center"><%= @redeemed_this_month %> <small>Redeemed This Month</small></h2>
       </div>
     </div>
@@ -136,8 +136,21 @@ $( document ).ready(function() { // 6,32 5,38 2,34
 </script>
 
 <script>
-
-
+window.sr = ScrollReveal();
+sr.reveal('.dash1', {
+  origin: 'bottom',
+  distance: '200px',
+  delay: '100',
+  duration: '1500',
+  viewFactor: 1,
+});
+sr.reveal('.dash2', {
+  origin: 'bottom',
+  distance: '200px',
+  delay: '500',
+  duration: '1500',
+  viewFactor: 1,
+});
 </script>
 
 
