@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<div class="row data-insights dash1">
+<div class="row data-insights dash2">
   <div class="col-sm-6">
     <div class="row">
       <div class="col-sm-12 redeemed-this-month">
@@ -116,7 +116,7 @@
     });
     $("#end_date").datepicker({ 
     maxDate: 0,
-dateFormat: "dd-mm-yy",
+    dateFormat: "dd-mm-yy",
         onSelect: function(selected) {
            $("#start_date").datepicker("option","maxDate", selected)
         }
@@ -162,21 +162,6 @@ sr.reveal('.dash2', {
   viewFactor: 1,
 });
 </script>
-
-
-
-<!-- Raw Data -->
-<!-- <h3>DashBoard</h3>
-<div>ACTIVE CARDS: <b><%= @active_cards %></b></div>
-<div>REDEEMED TODAY: <b><%= @redeemed_today %></b></div>
-<div>Total Gift Card Balance: <b><%= @total_gift_card_balance %></b></div>
-<div>Gift Cards Expired this month: <b><%= @expired_cards %></b></div>
-<div>Redeemed Last 30 Days: <b><%= @redeemed_this_month %></b></div>
-<div>Total Redeemed:<b><%= @redeemed_percentage.to_i %>%</b></div> -->
-
-
-
-
 
  <div class="input-group">
 
