@@ -20,7 +20,7 @@ class HomeController < ApplicationController
         @border_colors = []
         @monthly_summary.each do |k,v|
           @labels.push(k.to_s)
-          @data.push(Random.rand(1..100)) #Dummy data #TODO Change with real data 
+          @data.push(v)
           @colors.push("rgba(#{Random.rand(0..255)}, #{Random.rand(0..255)}, #{Random.rand(0..255)}, 0.2)")
           @border_colors.push("rgba(#{Random.rand(0..255)}, #{Random.rand(0..255)}, #{Random.rand(0..255)}, 0.4)")
         end
