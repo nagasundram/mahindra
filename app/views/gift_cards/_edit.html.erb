@@ -1,3 +1,4 @@
+<!-- Edit Gift Card Modal -->
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -7,18 +8,31 @@
     <div class="modal-body">
       <%= form_for(@gift_card, html: {method: :put}, remote: true) do |f|  %>
         <div id="error_explanation"></div>
-        <div class="form-group">
+
+        <div class="row">
+          <div class="col-sm-4">
+                  <div class="form-group">
           <%= label_tag(:card_number, "Gift Card Number") %>
           <%= text_field_tag(:card_number, '', class: 'form-control', disabled: true, value: @gift_card.card_number) %>
         </div>
-        <div class="form-group">
-          <%= f.date_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true %>
+          </div>
+          <div class="col-sm-4">
+          <label for="exp_date">Expiry Date</label>
+                    <div class="form-group">
+          <%= f.date_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true, disabled: 'true' %>
         </div>
-        <div class="form-group">
+          </div>
+          <div class="col-sm-4">
+                    <div class="form-group">
           <%= label_tag(:balance, "Gift Card Balance") %>
           <%= text_field_tag(:balance, '', class: 'form-control', disabled: true, value: @gift_card.balance) %>
         </div>
+          </div>
+        </div>
+
+
         <div class="form-group">
+        <label for="topup_amt">Top Up Amount</label>
           <%= text_field_tag(:top_up, '', placeholder: 'Top Up Amount', class: 'form-control') %>
         </div>
         <% params = request.query_parameters %>
@@ -26,7 +40,8 @@
         <%= hidden_field_tag(:search,'', value: params[:search]) %>
         <%= hidden_field_tag(:direction,'', value: params[:direction]) %>
         <div class="form-group">
-          <%= text_field_tag(:audit_comment, '', placeholder: 'Comment', class: 'form-control') %>
+        <label for="remarks">Remarks <span class="required-field">*</span></label>
+          <%= text_area_tag(:audit_comment, '', placeholder: 'Remarks', class: 'form-control', required: 'true') %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -36,3 +51,7 @@
     <% end %>
   </div>
 </div>
+
+<script>
+ $('#top_up').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+</script>
