@@ -88,14 +88,16 @@
 <div class="row">
   <div class="col-sm-4">
       <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
+      <label for="start_date">Start Date</label>
     <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date" %>
   </div>
   <div class="col-sm-4">
+  <label for="end_date">End Date</label>
     <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date" %>
   </div>
     <div class="col-sm-4">
     <span class="input-group-btn">
-       <%= submit_tag "Export", class: 'btn btn-success' %>
+       <%= submit_tag "Export", class: 'btn btn-success', id: 'report_btn' %>
     </span>
   </div>
   </div>
@@ -104,8 +106,12 @@
 
 </div> <!-- /Container -->
 
-
+<script>
+  $('#start_date, #end_date').prop('required', true);
+</script>
      <script>
+
+
   $(document).ready(function(){
     $("#start_date").datepicker({
     maxDate: 0,
@@ -170,3 +176,4 @@ sr.reveal('.dash2', {
 </div>
 <div class="modal fade " id="reportModel" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 </div>
+
