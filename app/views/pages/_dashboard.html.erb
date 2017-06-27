@@ -89,9 +89,20 @@
   <div class="col-sm-4">
       <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
     <%= date_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control' %>
+    <p>New Start Date: <input type="text" id="new_start_date"></p>
   </div>
   <div class="col-sm-4">
     <%= date_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end-date" %>
+
+    <p>New End Date: <input type="text" id="end_date"></p>
+
+     <script>
+  $( function() {
+    $( "#end_date" ).datepicker({maxDate: new Date()});
+     $( "#new_start_date" ).datepicker();
+  } );
+  </script>
+
   </div>
   <div class="col-sm-4">
     <span class="input-group-btn">
