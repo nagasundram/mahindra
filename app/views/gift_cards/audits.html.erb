@@ -1,6 +1,9 @@
 <div class="container common-wrap">
-  <div class="row">
-        <div class="col-sm-6 search-bar">
+<div class="row">
+       <div class="col-sm-6">
+           <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
+        </div>
+          <div class="col-sm-6 search-bar">
           <div class="search-bar">
             <%= form_tag(audits_gift_cards_path, :method => "get", id: "search-form") do %>
               <%= text_field_tag :search, params[:search], placeholder: "Gift Card Number", class: 'form-control' %>
@@ -8,10 +11,11 @@
             <% end %>
           </div>
         </div>
-    <div class="col-sm-12">
-        <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
-        <h4>Gift Cards Audits</h4>
- <div class="table-responsive data-tables">
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <h4 class="table-title">Gift Cards Audits</h4> 
+    <div class="table-responsive data-tables">
 <table class="table">
   <tr>
     <th>Date</th>
@@ -40,9 +44,52 @@
   <% end %>
 </table>
 </div>
-    </div>
   </div>
 </div>
+<!--   <div class="row">
+        <div class="col-sm-6 search-bar">
+          <div class="search-bar">
+            <%= form_tag(audits_gift_cards_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Gift Card Number", class: 'form-control' %>
+                 <%= submit_tag "Search", class: 'btn btn-success' %>
+            <% end %>
+          </div>
+        </div>
+    <div class="col-sm-12">
+        <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
+        <h4>Gift Cards Audits</h4> -->
+<!--  <div class="table-responsive data-tables">
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Gift Card Number</th>
+    <th>View changes</th>
+    <th>Remarks</th>
+  </tr>
+  <% if @gift_card_audits.present? %>
+    <% @gift_card_audits.each do |audit| %>
+      <tr>
+        <td><%= audit.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= GiftCard.find(audit.auditable_id).card_number %></td>
+        <td>
+          <% audit.audited_changes.each do |change| %>
+            <div class="inline"><%= change[0].titlecase %>: </div>
+            <div class="inline"><%= change[1][0] %> </div>
+            <div class="inline">To </div>
+            <div><%= change[1][1] %></div>
+          <% end %>
+        </td>
+        <td><%= popover("Remarks", "#{audit.comment}") %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr><td>No Gift Card Audits Found</td></tr>
+  <% end %>
+</table> -->
+<!-- </div>
+    </div>
+  </div> -->
+</div> <!-- /Container -->
 <%= paginate @gift_card_audits %>
 
 

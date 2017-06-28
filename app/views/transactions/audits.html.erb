@@ -2,14 +2,16 @@
 <div class="container common-wrap">
   <div class="row">
     <div class="col-sm-6 search-bar">
+     <%= link_to "View Transactions", transactions_path, class: 'anchor-title btn btn-primary' %>
+  </div>
+      <div class="col-sm-6">
+   
       <div class="search-bar">
         <%= form_tag(audits_transactions_path, :method => "get", id: "search-form") do %>
           <%= text_field_tag :search, params[:search], placeholder: "Invoice Number", class: 'form-control' %>
              <%= submit_tag "Search", class: 'btn btn-success' %>
         <% end %>
       </div>
-    <div class="col-sm-12">
-    <%= link_to "View Transactions", transactions_path, class: 'anchor-title btn btn-primary' %>
     </div>
   </div>
   <div class="row">
