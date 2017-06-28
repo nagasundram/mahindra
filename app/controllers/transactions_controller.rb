@@ -64,7 +64,7 @@ class TransactionsController < ApplicationController
 
   def report
     authorize! :read, Transaction
-    @transactions = Transaction.where(updated_at: params[:start_date].to_date..params[:end_date].to_date)
+    @transactions = Transaction.where(updated_at: params[:start_date].to_date..(params[:end_date].to_date)+1.day)
     respond_to do |format|
       format.html
       format.js

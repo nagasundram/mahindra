@@ -66,7 +66,7 @@
   <div class="col-sm-6">
     <div class="row">
       <div class="col-sm-12 redeemed-this-month">
-        <h2 class="text-center"><%= @redeemed_this_month %> <small>Redeemed This Month</small></h2>
+        <h2 class="text-center"><%= @redeemed_this_month %> <small>Redeemed Last 30 Days</small></h2>
       </div>
     </div>
   </div>
@@ -120,13 +120,13 @@
           $("#end_date").datepicker("option","minDate", selected)
         }
     });
-    $("#end_date").datepicker({ 
+    $("#end_date").datepicker({
     maxDate: 0,
     dateFormat: "dd-mm-yy",
         onSelect: function(selected) {
            $("#start_date").datepicker("option","maxDate", selected)
         }
-    });  
+    });
 });
   </script>
 
