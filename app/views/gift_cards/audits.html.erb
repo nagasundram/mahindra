@@ -1,5 +1,9 @@
-<h4>Gift Cards Audits</h4>
-  <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
+<div class="container common-wrap">
+  <div class="row">
+    <div class="col-sm-12">
+        <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
+        <h4>Gift Cards Audits</h4>
+           <div class="table-responsive data-tables">
 <table class="table">
   <tr>
     <th>Date</th>
@@ -27,6 +31,17 @@
     <tr><td>No Gift Card Audits Found</td></tr>
   <% end %>
 </table>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 <style type="text/css">
   div.inline { float:left; }
   .clearBoth { clear:both; }

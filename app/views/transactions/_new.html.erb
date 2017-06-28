@@ -63,8 +63,8 @@
   </div>
 </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       <%= f.submit "Submit", class: "btn btn-success" %>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
     </div>
 
   </div><!-- / Modal Body -->
@@ -72,6 +72,10 @@
   </div>
 </div>
 
+<script>
+  $('#transaction_invoice_number').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+    $('#transaction_redeemed_value').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+</script>
 
 <script>
 (function (exports) {

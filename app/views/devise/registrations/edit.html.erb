@@ -1,8 +1,8 @@
 <!-- Edit Account Template -->
-<div class="container">
+<div class="container common-wrap">
   <div class="row">
     <div class="col-sm-12">
-      <h3>Change Password</h3>
+      <h3>My Profile</h3>
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
 <div class="flash-messages">
         <%= devise_error_messages! %>
@@ -27,6 +27,7 @@
 </fieldset>
 <form>
       <fieldset class="well1">
+      <h3>Change Password</h3>
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
@@ -47,8 +48,6 @@
             </div>
           </div>
         </div>
-
-
       <div class="row">
         <div class="col-sm-12 authform marg-btn">
           <%= f.submit 'Change Password', :class => 'button' %>
