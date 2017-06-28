@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :gift_cards do
     collection do
+      get 'admin_validate'
       post 'validate'
       get 'audits'
     end

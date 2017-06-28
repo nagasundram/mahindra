@@ -10,7 +10,7 @@
       <%= form_for(@transaction, html: {method: :post}, remote: true) do |f|  %>
 
         <div id="error_explanation"></div>
-      
+
 <!-- Populate Data -->
 <div class="row">
   <div class="col-sm-6">
@@ -30,8 +30,13 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="form-group">
-      <%= label_tag(:store_code, "Store Id") %>
-      <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: current_user.store_code) %>
+      <% unless current_user.is_admin? %>
+        <%= label_tag(:store_code, "Store Code") %>
+        <%= text_field_tag(:store_code, '', class: 'form-control', disabled: true, value: current_user.store_code) %>
+      <% else %>
+        <%= label_tag(:store_code, "Store Code") %><span class="required-field">*</span>
+        <%= text_field_tag(:store_code, '', class: 'form-control', required: true) %>
+      <% end %>
     </div>
   </div>
   <div class="col-sm-6">

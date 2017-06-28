@@ -19,10 +19,15 @@ class TransactionsController < ApplicationController
 
   def create
     authorize! :create, Transaction
-    @transaction = current_user.transactions.new(transaction_params)
+    @transaction = Transaction.new(transaction_params)
+    if current_user.is_admin? && params[:store_code].present?
+      @transaction.user = User.find_by(store_code: params[:store_code])
+    else
+      @transaction.user = current_user
+    end
     @transaction.current_balance = @transaction.gift_card.balance - @transaction.redeemed_value
     respond_to do |format|
-      if @transaction.save
+      if @transaction && @transaction.save
         format.js {redirect_to gift_card_path(id:  encrypt_data(@transaction.gift_card.id) , card_number: @transaction.gift_card.card_number), notice: "Redemption successful"}
       else
         format.html { render :new }

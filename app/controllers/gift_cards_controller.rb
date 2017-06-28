@@ -39,6 +39,10 @@ class GiftCardsController < ApplicationController
     end
   end
 
+  def admin_validate
+    render 'gift_cards/_form'
+  end
+
   def update
     authorize! :update, GiftCard
     @gift_card = GiftCard.find(params[:id])
