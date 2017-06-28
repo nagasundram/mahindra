@@ -44,8 +44,8 @@
           <%= text_area_tag(:audit_comment, '', placeholder: 'Remarks', class: 'form-control', required: 'true') %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           <%= f.submit "Submit", class: "btn btn-success" %>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     <% end %>
