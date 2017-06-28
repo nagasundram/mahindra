@@ -58,8 +58,13 @@ class GiftCardsController < ApplicationController
   end
 
   def audits
-    authorize! :read, Transaction
-    @gift_card_audits = Audited::Audit.where(action: 'update', auditable_type: 'GiftCard', user_id: 1).order('created_at desc')
+    authorize! :read, GiftCard
+    @gift_card_audits = Audited::Audit.where(
+                          action: 'update',
+                          user_id: 1,
+                          auditable_type: 'GiftCard',
+                          auditable_id: GiftCard.where("card_number like ?", "%#{params[:search]}%").ids
+                        ).order('created_at desc').page(params[:page])
   end
 
   private

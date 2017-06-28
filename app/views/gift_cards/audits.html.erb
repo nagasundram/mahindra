@@ -1,9 +1,17 @@
 <div class="container common-wrap">
   <div class="row">
+        <div class="col-sm-6 search-bar">
+          <div class="search-bar">
+            <%= form_tag(audits_gift_cards_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Gift Card Number", class: 'form-control' %>
+                 <%= submit_tag "Search", class: 'btn btn-success' %>
+            <% end %>
+          </div>
+        </div>
     <div class="col-sm-12">
         <%= link_to "View Gift Cards", gift_cards_path, class: 'anchor-title btn btn-primary' %>
         <h4>Gift Cards Audits</h4>
-           <div class="table-responsive data-tables">
+ <div class="table-responsive data-tables">
 <table class="table">
   <tr>
     <th>Date</th>
@@ -35,11 +43,7 @@
     </div>
   </div>
 </div>
-
-
-
-
-
+<%= paginate @gift_card_audits %>
 
 
 <style type="text/css">

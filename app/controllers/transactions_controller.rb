@@ -74,7 +74,12 @@ class TransactionsController < ApplicationController
 
   def audits
     authorize! :read, Transaction
-    @audits = Audited::Audit.where(action: 'update', auditable_type: 'Transaction', user_id: 1).order('created_at desc')
+    @audits = Audited::Audit.where(
+                          action: 'update',
+                          user_id: 1,
+                          auditable_type: 'Transaction',
+                          auditable_id: Transaction.where("invoice_number like ?", "%#{params[:search]}%").ids
+                        ).order('created_at desc').page(params[:page])
   end
 
   private
