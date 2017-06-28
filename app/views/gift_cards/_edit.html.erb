@@ -19,7 +19,8 @@
           <div class="col-sm-4">
           <label for="exp_date">Expiry Date</label>
                     <div class="form-group">
-          <%= f.date_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true %>
+       <!--    <%= f.date_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true %> -->
+          <input type="text" id="gift_card_expiry" class="form-control" required>
         </div>
           </div>
           <div class="col-sm-4">
@@ -54,4 +55,63 @@
 
 <script>
  $('#top_up').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+</script>
+<script>
+   $( function() {
+    $( "#gift_card_expiry" ).datepicker({
+      minDate: 0,
+      required: true,
+    dateFormat: "dd-mm-yy",
+    });
+  } );
+     $("#gift_card_expiry").keydown(function (event) {
+    event.preventDefault();
+});
+</script>
+
+<script>
+(function (exports) {
+  function valOrFunction(val, ctx, args) {
+      if (typeof val == "function") {
+          return val.apply(ctx, args);
+      } else {
+          return val;
+      }
+  }
+
+  function InvalidInputHelper(input, options) {
+      input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+
+      function changeOrInput() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+              input.setCustomValidity("");
+          }
+      }
+
+      function invalid() {
+          if (input.value == "") {
+              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+          } else {
+             input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+          }
+      }
+
+      input.addEventListener("change", changeOrInput);
+      input.addEventListener("input", changeOrInput);
+      input.addEventListener("invalid", invalid);
+  }
+  exports.InvalidInputHelper = InvalidInputHelper;
+})(window);
+
+
+
+InvalidInputHelper(document.getElementById("audit_comment"), {
+  defaultText: "Remarks are required",
+  emptyText: "Remarks are required",
+});
+
+
+
 </script>
