@@ -19,7 +19,7 @@
           <div class="col-sm-4">
           <label for="exp_date">Expiry Date</label>
                     <div class="form-group">
-         <%= f.text_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true, id: "gift_card_expiry" %>
+         <%= f.text_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true, id: "gift_card_expiry", value: "#{f.object.expiry.strftime("%d-%m-%Y")}" %>
         </div>
           </div>
           <div class="col-sm-4">
