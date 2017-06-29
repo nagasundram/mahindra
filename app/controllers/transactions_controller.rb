@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
 
   def index
     authorize! :manage, Transaction
-    @transactions = Transaction.joins(:user,:gift_card).where("users.store_code like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search]}%","%#{params[:search]}%", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
+    @transactions = Transaction.joins(:user,:gift_card).where("lower(users.store_code) like ? or gift_cards.card_number like ? or invoice_number like ?", "%#{params[:search].downcase}%","%#{params[:search]}%", "%#{params[:search]}%").order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def new
