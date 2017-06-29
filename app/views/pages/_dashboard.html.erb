@@ -89,11 +89,11 @@
   <div class="col-sm-4">
       <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
       <label for="start_date">Start Date</label>
-    <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true" %>
+    <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true", oninvalid: "setCustomValidity('Start date is required')" %>
   </div>
   <div class="col-sm-4">
   <label for="end_date">End Date</label>
-    <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date"%>
+    <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date", oninvalid: "setCustomValidity('End date is required')"%>
   </div>
     <div class="col-sm-4">
     <span class="input-group-btn">
@@ -107,14 +107,31 @@
 </div> <!-- /Container -->
 
 <script>
+    var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+
+var yyyy = today.getFullYear();
+if(dd<10){
+    dd='0'+dd;
+} 
+if(mm<10){
+    mm='0'+mm;
+} 
+var today = dd+'/'+mm+'/'+yyyy;
+document.getElementById("start_date").value = today;
+document.getElementById("end_date").value = today;
+
+</script>
+
+<script>
   $('#start_date, #end_date').prop('required', true);
   $("#start_date, #end_date").keydown(function (event) {
     event.preventDefault();
 });
+
 </script>
      <script>
-
-
   $(document).ready(function(){
     $("#start_date").datepicker({
     maxDate: 0,
@@ -178,53 +195,5 @@ sr.reveal('.dash2', {
 <div class="modal fade " id="reportModel" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 </div>
 
-<!-- <script>
-(function (exports) {
-  function valOrFunction(val, ctx, args) {
-      if (typeof val == "function") {
-          return val.apply(ctx, args);
-      } else {
-          return val;
-      }
-  }
 
-  function InvalidInputHelper(input, options) {
-      input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
-
-      function changeOrInput() {
-          if (input.value == "") {
-              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
-          } else {
-              input.setCustomValidity("");
-          }
-      }
-
-      function invalid() {
-          if (input.value == "") {
-              input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
-          } else {
-             input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
-          }
-      }
-
-      input.addEventListener("change", changeOrInput);
-      input.addEventListener("input", changeOrInput);
-      input.addEventListener("invalid", invalid);
-  }
-  exports.InvalidInputHelper = InvalidInputHelper;
-})(window);
-
-
-
-InvalidInputHelper(document.getElementById("start_date"), {
-  defaultText: "Please enter Invoice Number",
-  emptyText: "Please enter Invoice Number al",
-  invalidText: function (input) {
-      return 'Invalid Invoice number';
-  }
-});
-
-
-
-</script> -->
 
