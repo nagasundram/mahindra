@@ -19,7 +19,10 @@
           <div class="col-sm-4">
           <label for="exp_date">Expiry Date</label>
                     <div class="form-group">
-         <%= f.text_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true, id: "gift_card_expiry", value: "#{f.object.expiry.strftime("%d-%m-%Y")}" %>
+      <!--    <%= f.text_field :expiry, placeholder: 'Expiry', :autofocus => true, class: 'form-control', required: true, id: "gift_card_expiry", value: "#{f.object.expiry.strftime("%d-%m-%Y")}" %> -->
+
+         <%= f.text_field :expiry, value: "#{f.object.expiry.strftime("%d-%m-%Y")}", id: "gift_card_expiry", class: "form-control" %>
+
         </div>
           </div>
           <div class="col-sm-4">
@@ -33,7 +36,7 @@
 
         <div class="form-group">
         <label for="topup_amt">Top Up Amount</label>
-          <%= text_field_tag(:top_up, '', placeholder: 'Top Up Amount', class: 'form-control') %>
+          <%= text_field_tag(:top_up, '', placeholder: 'Top Up Amount', class: 'form-control', required: 'true') %>
         </div>
         <% params = request.query_parameters %>
         <%= hidden_field_tag(:page, '', value: params[:page])%>
@@ -66,6 +69,10 @@
      $("#gift_card_expiry").keydown(function (event) {
     event.preventDefault();
 });
+
+
+
+
 </script>
 
 <script>
@@ -109,6 +116,11 @@
 InvalidInputHelper(document.getElementById("audit_comment"), {
   defaultText: "Remarks are required",
   emptyText: "Remarks are required",
+});
+
+InvalidInputHelper(document.getElementById("top_up"), {
+  defaultText: "Amount is required",
+  emptyText: "Amount is required",
 });
 
 
