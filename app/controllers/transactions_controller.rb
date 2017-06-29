@@ -53,7 +53,9 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     respond_to do |format|
       if @transaction.update_attributes(update_params)
-        @transaction.gift_card.update_attributes(balance: @transaction.current_balance)
+        @gift_card = @transaction.gift_card
+        @gift_card.balance = @transaction.current_balance
+        @gift_card.save_without_auditing
         format.html {redirect_to transactions_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Transaction Updated successfully"}
       else
         format.html { render :edit }
