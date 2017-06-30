@@ -1,5 +1,5 @@
 <%# Rails flash messages styled for Bootstrap 3.0 %>
-<div class="flash-messages">
+<div class="flash-messages flash-animated">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
       <div class="alert alert-dismissible alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
@@ -11,8 +11,8 @@
 </div>
 
 <script>
-$('.flash-messages').addClass('animated slideInDown');
+$('.flash-animated').addClass('animated slideInDown');
    setTimeout(function(){
-      $(".flash-messages").addClass("animated slideOutUp");
+      $(".flash-animated").addClass("animated slideOutUp");
   }, 4000);
 </script>

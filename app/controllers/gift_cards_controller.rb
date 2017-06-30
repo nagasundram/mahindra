@@ -25,6 +25,7 @@ class GiftCardsController < ApplicationController
     @gift_card = GiftCard.find(decrypt_data(params[:id]))
     if @gift_card.present?
       @transactions = @gift_card.transactions.order('created_at desc').limit(5)
+      @expired = Date.today > @gift_card.expiry
     else
       redirect_to root_path, alert: "Invalid Card Details."
     end

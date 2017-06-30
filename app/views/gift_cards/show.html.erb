@@ -31,7 +31,14 @@
 </div>
 <div class="row">
   <div class="col-sm-12 redeem-btn">
-    <%= link_to "Redeem", new_transaction_path(id: encrypt_data(@gift_card.id)),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'} %>
+    <%= link_to "Redeem", new_transaction_path(id: encrypt_data(@gift_card.id)), {disabled: @expired, class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'}  %>
+    <%if @expired %>
+      <div class="flash-messages">
+      <div class="alert alert-dismissible alert-danger">
+        <%= content_tag :div, "Gift Card Validity Expired.", :id => "flash_expired" %>
+      </div>
+      </div>
+    <% end %>
     <%= render partial: "layouts/modal_window", locals: { modal_id: 'redeemModal' } %>
   </div>
 </div>
