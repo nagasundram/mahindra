@@ -31,7 +31,11 @@
 </div>
 <div class="row">
   <div class="col-sm-12 redeem-btn">
+  <% if @expired %>
+    <button disabled="disabled" class="btn btn-primary">Redeem</button>
+  <% else %>
     <%= link_to "Redeem", new_transaction_path(id: encrypt_data(@gift_card.id)), {disabled: @expired, class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#redeemModal'}  %>
+  <% end %>
     <%if @expired %>
       <div class="flash-messages">
       <div class="alert alert-dismissible alert-danger">
