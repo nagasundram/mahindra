@@ -14,7 +14,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <h4 class="table-title">Gift Cards Audits</h4> 
+    <h4 class="table-title">Gift Cards Audits</h4>
     <div class="table-responsive data-tables">
 <table class="table">
   <tr>
@@ -30,10 +30,16 @@
         <td><%= GiftCard.find(audit.auditable_id).card_number %></td>
         <td>
           <% audit.audited_changes.each do |change| %>
-            <div class="inline"><%= change[0].titlecase %>: </div>
-            <div class="inline"><%= change[1][0] %> </div>
-            <div class="inline">To </div>
-            <div><%= change[1][1] %></div>
+            <div class="inline"><%= change[0].titlecase %>:&nbsp;</div>
+            <% if change[0] == "expiry" %>
+              <div class="inline"><%= change[1][0].strftime("%d/%m/%Y") %>&nbsp;</div>
+              <div class="inline">To&nbsp;</div>
+              <div><%= change[1][1].strftime("%d/%m/%Y") %>&nbsp;</div>
+            <% else %>
+              <div class="inline"><%= change[1][0] %>&nbsp;</div>
+              <div class="inline">To&nbsp;</div>
+              <div><%= change[1][1] %>&nbsp;</div>
+            <% end %>
           <% end %>
         </td>
         <td><%= popover("Remarks", "#{audit.comment}") %></td>
