@@ -24,8 +24,6 @@
       <%= label_tag(:expiry, "Expiration Date") %>
       <%= text_field_tag(:expiry, '', class: 'form-control', disabled: true, value: @gift_card.formatted_expiry) %>
     </div>
-
-
   </div>
 </div>
 
@@ -62,6 +60,16 @@
         <%= label_tag(:redeemed_value, "Amount") %> <span class="required-field">*</span>
       <%= f.text_field :redeemed_value, class: 'form-control', required: 'true' %>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+            <div class="form-group">
+        <label for="remarks">Remarks <span class="required-field">*</span></label>
+        <!-- Commments for Admin Reedeem here! -->
+          <%= text_area_tag(:audit_comment, '', placeholder: 'Remarks', class: 'form-control', required: 'true') %>
+        </div>
   </div>
 </div>
     <div class="modal-footer">
