@@ -53,7 +53,7 @@
   <div class="col-sm-6">
     <div class="form-group">
       <label for="redeemed_value">Amount</label>
-      <%= f.text_field :redeemed_value, placeholder: 'Amount', class: 'form-control', required: 'true', pattern:'^\d{1,10}$', oninvalid: "setCustomValidity('Amount is required')"  %>
+      <%= f.text_field :redeemed_value, placeholder: 'Amount', class: 'form-control'  %>
     </div>
   </div>
 </div>
@@ -76,7 +76,7 @@
 </div>
 
 <script>
- $('#transaction_redeemed_value, #transaction_invoice_number').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+ $('#transaction_redeemed_value, #transaction_invoice_number').attr('onkeypress', 'return event.charCode >= 46 && event.charCode <= 57');
 
 </script>
 
