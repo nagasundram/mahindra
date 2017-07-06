@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.csv { send_data @transactions.to_csv }
+      format.csv { send_data @transactions.to_csv, filename: "Card Transaction as on #{params[:end_date].to_date.strftime("%d %B %Y")}.csv" }
     end
   end
 
