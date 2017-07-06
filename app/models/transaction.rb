@@ -51,7 +51,7 @@ class Transaction < ApplicationRecord
           (transaction.gift_card.status)? "Active" : "Inactive",
           transaction.gift_card.owning_store_code,
           transaction.gift_card.owning_store_name,
-          transaction.gift_card.activation_date,
+          transaction.gift_card.activation_date.strftime("%d/%m/%Y"),
           transaction.gift_card.activation_amount,
           transaction.user.store_code,
           transaction.user.store_name,

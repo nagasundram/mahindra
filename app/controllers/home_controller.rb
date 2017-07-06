@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       @redeemed_this_month = Transaction.where(updated_at: 1.month.ago.to_date..(Date.today+1.day)).sum(:redeemed_value).to_i
       @expired_cards = GiftCard.where(expiry: Date.today.beginning_of_month..Date.today).count
       @transactions= Transaction.group('DATE(updated_at)').sum(:redeemed_value)
-      @redeemed_percentage = (Transaction.sum(:redeemed_value)/GiftCard.active_cards.sum(:balance)*100)
+      @redeemed_percentage = (Transaction.sum(:redeemed_value).to_f/GiftCard.active_cards.sum(:balance.to_f)*100)
       @monthly_summary = {}
       (1.month.ago.to_date..Date.today).each {|x| @monthly_summary[x] = 0}
         @monthly_summary.each do |k,v|
