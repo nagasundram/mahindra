@@ -27,21 +27,38 @@ class Transaction < ApplicationRecord
     CSV.generate do |csv|
       csv << [
         "Transaction Date",
-        "Invoice Number",
         "Gift Card Number",
-        "Store Code",
-        "Store Name",
-        "Gift Card Balance",
-        "Amount Redeemed"]
+        "Invoice Number",
+        "Expiry Date",
+        "Current Status",
+        "Owning Store Code",
+        "Owning Store Name",
+        "Gift Card Activation Date",
+        "Activation Amount",
+        "Redeemed Store Code",
+        "Redeemed Store Code",
+        "Region",
+        "City",
+        "Amount Redeemed",
+        "Gift Card Balance"
+        ]
       all.each do |transaction|
         csv << [
-          transaction.formatted_created_at,
-          transaction.invoice_number,
+          transaction.updated_at.strftime("%d/%m/%Y"),
           transaction.gift_card.card_number,
+          transaction.invoice_number,
+          transaction.gift_card.expiry.strftime("%d/%m/%Y"),
+          (transaction.gift_card.status)? "Active" : "Inactive",
+          transaction.gift_card.owning_store_code,
+          transaction.gift_card.owning_store_name,
+          transaction.gift_card.activation_date,
+          transaction.gift_card.activation_amount,
           transaction.user.store_code,
           transaction.user.store_name,
-          transaction.current_balance,
-          transaction.redeemed_value
+          transaction.user.region,
+          transaction.user.city,
+          transaction.redeemed_value,
+          transaction.current_balance
         ]
       end
     end
