@@ -13,33 +13,6 @@
 
 <!-- Populate Data -->
 <div class="row">
-<div class="col-sm-12">
-<h3 id="expired_card" style="  
-text-align: left;
-  margin-top: 0;
-  border: 1px solid #E41C39;
-  padding: 10px;
-  color: #E41C39;
-  font-size: 18px;"></h3>
-      <script>
-   var exp_date  =    '<%= @gift_card.formatted_expiry %>';
-    var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-
-var yyyy = today.getFullYear();
-if(dd<10){
-    dd='0'+dd;
-} 
-if(mm<10){
-    mm='0'+mm;
-} 
-var today = dd+'/'+mm+'/'+yyyy;
-if (exp_date < today) {
-  document.getElementById("expired_card").innerHTML = "Card has expired";
-}
-    </script>
-</div>
   <div class="col-sm-6">
     <div class="form-group">
       <%= label_tag(:card_number, "Gift Card Number") %>
