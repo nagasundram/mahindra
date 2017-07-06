@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
         @gift_card = @transaction.gift_card
         @gift_card.balance = @transaction.current_balance
         @gift_card.save_without_auditing
-        format.html {redirect_to transactions_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Transaction Updated successfully"}
+        format.html {redirect_to transactions_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Changes saved successfully"}
       else
         format.html { render :edit }
         format.js

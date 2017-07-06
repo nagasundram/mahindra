@@ -49,7 +49,7 @@ class GiftCardsController < ApplicationController
     @gift_card = GiftCard.find(params[:id])
     respond_to do |format|
       if @gift_card.update_attributes({balance: @gift_card.balance + params[:top_up].to_f, expiry: params[:gift_card][:expiry],audit_comment: params[:audit_comment]})
-        format.html {redirect_to gift_cards_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Top up successful"}
+        format.html {redirect_to gift_cards_path(page: params[:page], search: params[:search], direction: params[:direction]), notice: "Changes saved successfully"}
       else
         format.html { render :edit }
         format.js
