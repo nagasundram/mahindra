@@ -27,13 +27,17 @@
         <th>Store Code</th>
         <th>Redeemed</th>
         <th>Balance</th>
+        <th>Remarks</th>
         <th>Action</th>
       </tr>
       <% end %>
       <% if @transactions.present? %>
         <% @transactions.each do |transaction| %>
           <tr>
-    <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+            <%= render partial: 'transactions/transaction', locals: { transaction: transaction }%>
+            <td>
+              <%= popover("Remarks", "#{transaction.audits.first.comment}")%>
+            </td>
             <td>
               <%= link_to "Edit", edit_transaction_path({id:transaction, page: params[:page], search: params[:search], direction: params[:direction]}),{class: "btn btn-primary", remote: true, 'data-toggle' =>  "modal", 'data-target' => '#editTransaction'} %>
             </td>
@@ -56,3 +60,10 @@
 </div>
 
 </div> <!-- Container -->
+<script type="text/javascript">
+  $("[data-pop-over]").popover({
+      placement: 'auto',
+      animation: true,
+      trigger: "click hover focus"
+    });
+</script>

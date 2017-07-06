@@ -29,6 +29,7 @@ class TransactionsController < ApplicationController
     @transaction.current_balance = @transaction.gift_card.balance - @transaction.redeemed_value
     respond_to do |format|
       if @transaction && @transaction.save
+        @transaction.audits.first.update_attributes({comment: params[:comment]}) if current_user.is_admin?
         format.js {redirect_to gift_card_path(id:  encrypt_data(@transaction.gift_card.id) , card_number: @transaction.gift_card.card_number), notice: "Redemption successful"}
       else
         format.html { render :new }

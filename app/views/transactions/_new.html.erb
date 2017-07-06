@@ -63,15 +63,16 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12">
-            <div class="form-group">
-        <label for="remarks">Remarks <span class="required-field">*</span></label>
-        <!-- Commments for Admin Reedeem here! -->
-          <%= text_area_tag(:audit_comment, '', placeholder: 'Remarks', class: 'form-control', required: 'true') %>
+    <% if current_user.is_admin? %>
+      <div class="row">
+        <div class="col-sm-12">
+                  <div class="form-group">
+              <label for="remarks">Remarks <span class="required-field">*</span></label>
+                <%= text_area_tag(:comment, '', placeholder: 'Remarks', class: 'form-control', required: 'true') %>
+              </div>
         </div>
-  </div>
-</div>
+      </div>
+    <% end %>
     <div class="modal-footer">
       <%= f.submit "Submit", class: "btn btn-success" %>
       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
