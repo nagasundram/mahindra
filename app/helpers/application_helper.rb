@@ -14,7 +14,8 @@ module ApplicationHelper
                         title: title,
                         data: {
                             pop_over: true,
-                            content: content
+                            content: content,
+                            animation: true,
                         })
   end
 
