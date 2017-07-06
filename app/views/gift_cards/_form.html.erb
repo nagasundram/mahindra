@@ -15,12 +15,19 @@
       <%= submit_tag("Validate", :class => 'btn btn-primary') %>
       <%= button_tag("Clear", type: :reset, :class => 'btn btn-danger') %>
     </div>
-  <% end %>
+      <% end %>
 </div>
 </div>
 
 <script>
 $('#card_number, #pin').attr('onkeypress', 'return event.charCode >= 48 && event.charCode <= 57');
+
+$('#pin').keypress(function(e){
+      if(e.which == 13){
+           $(this).closest('form').submit();
+       }
+    });
+
 </script>
 
 <script>
