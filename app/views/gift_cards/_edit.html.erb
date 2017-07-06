@@ -36,7 +36,7 @@
 
         <div class="form-group">
         <label for="topup_amt">Top Up Amount</label>
-          <%= text_field_tag(:top_up, '', placeholder: 'Top Up Amount', class: 'form-control', required: 'true') %>
+          <%= text_field_tag(:top_up, '', placeholder: 'Top Up Amount', class: 'form-control') %>
         </div>
         <% params = request.query_parameters %>
         <%= hidden_field_tag(:page, '', value: params[:page])%>
@@ -118,10 +118,7 @@ InvalidInputHelper(document.getElementById("audit_comment"), {
   emptyText: "Remarks are required",
 });
 
-InvalidInputHelper(document.getElementById("top_up"), {
-  defaultText: "Amount is required",
-  emptyText: "Amount is required",
-});
+
 
 
 
