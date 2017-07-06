@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
 <% unless current_user.is_admin? %>
-  <li><%= link_to 'Redeem', root_path %></li>
+  <li><%= link_to 'Home', root_path %></li>
 <% else %>
-  <li><%= link_to 'Home', admin_validate_gift_cards_path %></li>
+  <li><%= link_to 'Redeem', admin_validate_gift_cards_path %></li>
 <% end %>
   <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
