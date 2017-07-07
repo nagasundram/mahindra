@@ -3,7 +3,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <h4 class="modal-title">Transactions</h4>
+      <h4 class="modal-title">Transactionsa</h4>
     </div>
     <div class="modal-body">
             <div class="well">
@@ -30,33 +30,40 @@
             </div>
 
       <div>
-        <h5>Redeemed Amount Changes</h5>
+        <h5><strong>Redeemed Amount Changes</strong></h5>
         <div class="row">
           <div class="col-sm-3">Date</div>
-          <div class="col-sm-3">From</div>
-          <div class="col-sm-3">To</div>
-          <div class="col-sm-3">Balance</div>
+          <div class="col-sm-2">From</div>
+          <div class="col-sm-2">To</div>
+          <div class="col-sm-2">Balance</div>
+          <div class="col-sm-3">Remarks</div>
         </div>
         <% audits.each_with_index do|audit, index| %>
           <% change = audit.audited_changes %>
           <% if change["redeemed_value"].present? %>
             <div class="row">
               <div class="col-sm-3"><%= audit.created_at.strftime("%d/%m/%Y") %></div>
-              <div class="col-sm-3"><%= change["redeemed_value"][0] %></div>
-              <div class="col-sm-3"><%= change["redeemed_value"][1] %></div>
-              <div class="col-sm-3">
+              <div class="col-sm-2"><%= change["redeemed_value"][0] %></div>
+              <div class="col-sm-2"><%= change["redeemed_value"][1] %></div>
+              <div class="col-sm-2">
                 <%= change["current_balance"][1] %>
-                <%= popover("Remarks", "#{audit.comment}") %>
+          <!--       <%= popover("Remarks", "#{audit.comment}") %> -->
               </div>
 
+              <div class="col-sm-3">
+           <!--      <%= change["current_balance"][1] %> -->
+                <%= popover("Remarks", "#{audit.comment}") %>
+              </div>
             </div>
           <% end %>
         <% end %>
-        <h5>Invoice Changes</h5>
+        <hr>
+        <h5><strong>Invoice Changes</strong></h5>
         <div class="row">
           <div class="col-sm-3">Date</div>
           <div class="col-sm-3">From</div>
           <div class="col-sm-3">To</div>
+          <div class="col-sm-3">Remarks</div>
         </div>
         <% audits.each_with_index do|audit, index| %>
           <% change = audit.audited_changes %>
