@@ -9,14 +9,16 @@ module ApplicationHelper
   end
 
   def popover(title, content)
-    content_tag(:i, '', class: "glyphicon glyphicon-info-sign",
-                        id: "#{title}_help",
-                        title: title,
-                        data: {
-                            pop_over: true,
-                            content: content,
-                            animation: true,
-                        })
+    if content.present?
+      content_tag(:i, '', class: "glyphicon glyphicon-info-sign",
+                          id: "#{title}_help",
+                          title: title,
+                          data: {
+                              pop_over: true,
+                              content: content,
+                              animation: true,
+                          })
+    end
   end
 
 end
