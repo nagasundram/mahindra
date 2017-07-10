@@ -1,13 +1,19 @@
 .validate-outer{
   height: calc(100vh - 90px);
-  display: flex;
+  position: relative;
   .authform{
-    margin: auto;
+    // margin: auto;
     min-width: 320px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
   }
   form{
-        background: rgba(225, 225, 225, .5);
-        border:none;
+    background: rgba(225, 225, 225, .5);
+    border:none;
   }
   .center{
     .btn{
