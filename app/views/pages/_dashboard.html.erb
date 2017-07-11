@@ -95,7 +95,6 @@
   <label for="end_date">End Date</label>
     <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date", oninvalid: "setCustomValidity('End date is required')"%>
   </div>
-  <%= @redeemed_percentage %>
     <div class="col-sm-4">
     <span class="input-group-btn">
        <%= submit_tag "Export", class: 'btn btn-success', id: 'report_btn' %>
