@@ -19,7 +19,7 @@ namespace :gift_card do
           puts "Inserting"
           puts gift_card_data
           gc = GiftCard.create!(gift_card_data)
-          puts "Success"
+          puts "#{gc.card_number}Success"
         end
         rescue ActiveRecord::RecordInvalid => invalid
           puts invalid
