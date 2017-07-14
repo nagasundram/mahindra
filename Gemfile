@@ -3,7 +3,6 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-ruby '2.3.1'
 gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -14,7 +13,6 @@ gem 'jbuilder', '~> 2.5'
 gem "audited", "~> 4.5"
 gem 'kaminari'
 gem 'custom_error_message', '~> 1.1.1'
-gem 'pg'
 gem 'cancan'
 gem "roo" #to read from all common spreadsheet types
 group :development, :test do
