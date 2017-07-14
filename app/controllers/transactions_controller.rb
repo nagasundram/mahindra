@@ -80,7 +80,7 @@ class TransactionsController < ApplicationController
     authorize! :read, Transaction
     @audits = Audited::Audit.where(
                           action: 'update',
-                          user_id: 1,
+                          user_id: User.find_by_email(Rails.application.secrets.admin_email).id,
                           auditable_type: 'Transaction',
                           auditable_id: Transaction.where("invoice_number like ?", "%#{params[:search]}%").ids
                         ).order('created_at desc').page(params[:page])

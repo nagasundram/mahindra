@@ -62,7 +62,7 @@ class GiftCardsController < ApplicationController
     authorize! :read, GiftCard
     @gift_card_audits = Audited::Audit.where(
                           action: 'update',
-                          user_id: 1,
+                          user_id: User.find_by_email(Rails.application.secrets.admin_email).id,
                           auditable_type: 'GiftCard',
                           auditable_id: GiftCard.where("card_number like ?", "%#{params[:search]}%").ids
                         ).order('created_at desc').page(params[:page])
