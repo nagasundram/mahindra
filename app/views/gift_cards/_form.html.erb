@@ -7,15 +7,20 @@
     <div class="form-group">
     <%= text_field_tag(:card_number, '', :autofocus => true, class: 'form-control', required: 'true', placeholder: 'Gift Card Number', pattern:'^\d{16}$', maxlength:'16') %>
     </div>
-    <div class="form-group">
-      <%= text_field_tag(:pin, '', class: 'form-control secure-text', required: 'true', placeholder:'PIN', maxlength:'6', novalidate: 'true' ) %>
-    </div>
-
+    <% unless current_user.is_admin?  %>
+      <div class="form-group">
+        <%= text_field_tag(:pin, '', class: 'form-control secure-text', required: 'true', placeholder:'PIN', maxlength:'6', novalidate: 'true' ) %>
+      </div>
+    <% end %>
     <div class="center">
-      <%= submit_tag("Validate", :class => 'btn btn-primary') %>
+      <% unless current_user.is_admin? %>
+        <%= submit_tag("Validate", :class => 'btn btn-primary') %>
+      <% else %>
+        <%= submit_tag("Submit", :class => 'btn btn-primary') %>
+      <% end %>
       <%= button_tag("Clear", type: :reset, :class => 'btn btn-danger') %>
     </div>
-      <% end %>
+  <% end %>
 </div>
 </div>
 
