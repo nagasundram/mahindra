@@ -87,7 +87,7 @@
 </div>
 <div class="row">
   <div class="col-sm-4">
-      <%= form_tag(report_transactions_path, :method => "get", id: "export-form", remote: true) do %>
+      <%= form_tag(report_transactions_path, :method => "get", id: "export-form") do %>
       <label for="start_date">Start Date</label>
     <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true", oninvalid: "setCustomValidity('Start date is required')" %>
   </div>
@@ -121,7 +121,7 @@ if(mm<10){
 var today = dd+'/'+mm+'/'+yyyy;
 document.getElementById("start_date").value = today;
 document.getElementById("end_date").value = today;
-
+$('#report_btn').removeAttr('data-disable-with');
 </script>
 
 <script>

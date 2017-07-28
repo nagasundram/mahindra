@@ -69,11 +69,7 @@ class TransactionsController < ApplicationController
   def report
     authorize! :read, Transaction
     @transactions = Transaction.where(updated_at: params[:start_date].to_date..(params[:end_date].to_date)+1.day)
-    respond_to do |format|
-      format.html
-      format.js
-      format.csv { send_data @transactions.to_csv, filename: "Card Transaction as on #{params[:end_date].to_date.strftime("%d %B %Y")}.csv" }
-    end
+     send_data @transactions.to_csv, filename: "Card Transaction as on #{params[:end_date].to_date.strftime("%d %B %Y")}.csv"
   end
 
   def audits
