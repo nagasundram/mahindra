@@ -89,11 +89,11 @@
   <div class="col-sm-4">
       <%= form_tag(report_transactions_path, :method => "get", id: "export-form") do %>
       <label for="start_date">Start Date</label>
-    <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true", oninvalid: "setCustomValidity('Start date is required')" %>
+    <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true" %>
   </div>
   <div class="col-sm-4">
   <label for="end_date">End Date</label>
-    <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date", oninvalid: "setCustomValidity('End date is required')"%>
+    <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date"%>
   </div>
     <div class="col-sm-4">
     <span class="input-group-btn">
