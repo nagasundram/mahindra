@@ -88,9 +88,20 @@
 </div>
 
       <%= form_tag(report_transactions_path, :method => "get", id: "export-form") do %>
-    <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true" %>
+<div class="row">
+  <div class="col-sm-4">
+     <%= text_field_tag :start_date, '', placeholder: "Start Date", class: 'form-control', id: "start_date",required: "true" %>
+  </div>
+  <div class="col-sm-4">
     <%= text_field_tag :end_date, '', placeholder: "End Date", class: 'form-control', id: "end_date"%>
-       <%= submit_tag "Export", class: 'btn btn-success', id: 'report_btn' %>
+  </div>
+  <div class="col-sm-4">
+    <%= submit_tag "Export", class: 'btn btn-success', id: 'report_btn' %>
+  </div>
+</div>
+
+
+
   <% end %>
 
 
