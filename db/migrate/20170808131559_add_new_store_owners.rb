@@ -25,6 +25,7 @@ class AddNewStoreOwners < ActiveRecord::Migration[5.1]
       user.status = 1
       user.password = "#{user.store_code}-mgr"
       user.password_confirmation = "#{user.store_code}-mgr"
+      user.save
     end
   end
 end
