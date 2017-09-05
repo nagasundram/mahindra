@@ -45,7 +45,7 @@ class Transaction < ApplicationRecord
       all.each do |transaction|
         csv << [
           transaction.updated_at.strftime("%d/%m/%Y"),
-          ="#{transaction.gift_card.card_number}",
+          "'#{transaction.gift_card.card_number}",
           transaction.invoice_number,
           transaction.gift_card.expiry.strftime("%d/%m/%Y"),
           (transaction.gift_card.status)? "Active" : "Inactive",
